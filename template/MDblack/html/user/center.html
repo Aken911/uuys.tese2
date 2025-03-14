@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="MaDouYm">
+		<title>个人中心 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link href="{$maccms.path}MDassets/css/user.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div id="usercenter" class="page">
+			<div class="page-content">
+				{include file="system/header"}
+				{include file="module/left_login"}
+				{include file="module/left"}
+				<div class="container">
+					{include file="user/menu"}
+					<div class="clearfix usercenter-page">
+						<div class="user_center usercenter-box child-view">
+							<div class="pc-hide main-title pl3">个人中心</div>
+							<a href="{:url('user/share')}"><div class="user_center_item"><i class="iconfont icon-left icon-VIP"></i>提升会员等级<i class="iconfont icon-jiantou"></i></div></a>
+							<a href="{:url('user/info')}"><div class="user_center_item"><i class="iconfont icon-left icon-mima"></i>修改登录密码<i class="iconfont icon-jiantou"></i></div></a>
+							<a href="{:url('user/bind')}?ac=email"><div class="user_center_item"><i class="iconfont icon-left icon-youxiang"></i>修改绑定邮箱<i class="iconfont icon-jiantou"></i></div></a>
+							<a href="{:url('user/logout')}"><div class="user_center_item"><i class="iconfont icon-left icon-login"></i>退出登录</div></a>
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="MaDouYm">
+		<title>如何回家 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link href="{$maccms.path}MDassets/css/help.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div id="help" class="page">
+			<div class="page-content">
+				{include file="system/header"}
+				{include file="module/left_login"}
+				{include file="module/left"}
+				<div class="container">
+					<div class="clearfix help-page">
+						<div class="goHome child-view">
+							<div class="go-home-content">
+								<div class="main-title">回家的路</div>
+								<div class="content-div">
+									<div class="go-home-item">
+										<div class="go-home-title">·永久域名：</div>
+										<div class="go-home-txt">建议保存收藏，永不迷路，地址<a href="http://{$maccms.site_url}" target="_blank" class="high underline">{$maccms.site_url}</a></div>
+									</div>
+									<div class="go-home-item">
+										<div class="go-home-title">·如何获取最新网址？</div>
+										<div class="go-home-txt">
+											<p>1、发送邮件”最新网址“到邮箱<span class="go-home-a">{$maccms.site_email}</span>，系统将自动回复最新地址到您的邮箱；</p>
+											<p>2、建议保存本站所发给您的邮件，以便随时获取最新地址；</p>
+											<p>3、完成邮箱绑定，本站地址更换时，将自动发送最新地址到您的绑定邮箱中，立即<span class="go-home-a">绑定邮箱</span></p>
+										</div>
+									</div>
+									<div class="go-home-item">
+										<div class="go-home-title">·最新地址无法访问怎么办？</div>
+										<div class="go-home-txt">1、尝试在网址前加“https://”</div>
+										<div class="go-home-txt">2、更换其他浏览器，建议使用chrome谷歌浏览器；</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="module/popup"}
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

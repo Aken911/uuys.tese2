@@ -1,0 +1,22 @@
+<a {if condition="$GLOBALS['user']['group_id'] eq 3"}href="{:mac_url_vod_play($vo)}"{else}{if condition="$vo.vod_level eq '6'"}onclick="vip()"{else}href="{:mac_url_vod_play($vo)}"{/if}{/if} class="video-item-col col-5">
+	<div class="video-item">
+		<div class="video-img">
+			<div class="pre-img">
+				<img class="madou-lazy" src="{$maccms.path}MDassets/img/loading.png" data-src="{:mac_url_img($vo.vod_pic)}" onerror="javascript:this.src='{$maccms.path}MDassets/img/loading.png'">
+				<div class="video-img-desc">
+					<div class="right">{$vo.vod_remarks} {$vo.vod_duration|mac_default=''}</div>
+				</div>
+				{if condition="$vo.vod_level eq '6'"}
+				<div class="only-vip">VIP</div>
+				{/if}
+			</div>
+		</div>
+		<div class="video-desc">
+			<div class="video-desc-content">{$vo.vod_name}</div>
+			<div class="video-desc-comment">
+				<span>{$vo.vod_hits}观看</span>
+				<span><i class="iconfont icon-zan1 cGreen"></i>{if empty($vo.vod_up+$vo.vod_down)}100{else/}{:round($vo.vod_up*100/($vo.vod_up+$vo.vod_down))}{/if}%</span>
+			</div>
+		</div>
+	</div>
+</a>

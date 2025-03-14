@@ -1,0 +1,12 @@
+{if condition="$GLOBALS['config']['site']['site_banner_status'] eq 1"}
+<div class="container banner">
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			{maccms:website num="200" order="desc" type="'.($GLOBALS['config']['site']['site_banner_id']).'" by="time"}
+			<a href="{$vo.website_jumpurl}" class="swiper-slide" style="background-image:url({:mac_url_img($vo.website_logo)})"></a>
+			{/maccms:website}
+		</div>
+		<div class="swiper-pagination"></div>
+	</div>
+</div>
+{/if}

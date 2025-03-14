@@ -1,0 +1,21 @@
+<ul id="slide-userInfo-out" class="userInfoLeftMenu sidenav">
+	{if condition="$GLOBALS['user']['user_id']" gt 0}
+	<li class="username">{$user.user_name}{if condition="$GLOBALS['user']['group_id'] eq 3"}<i class="vip-icon vip2"></i>{else}<i class="vip-icon vip1"></i>{/if}</li>
+	<li>
+		<div class="login-div">
+			<a href="{:mac_url('user/index')}" class="btn btn-empty">任务</a>
+			<a href="{:mac_url('user/share')}" class="btn">邀请</a>
+		</div>
+	</li>
+	<li class="menu-item"><a href="{:mac_url('user/index')}"><i class="icon-renwu1 iconfont icon-menu"></i>我的任务</a></li>
+	<li class="menu-item"><a href="{:mac_url('user/favs')}"><i class="icon-shexiangji iconfont icon-menu"></i>我的视频</a></li>
+	<li class="menu-item"><a href="{:mac_url('user/novel')}"><i class="icon-tupian1 iconfont icon-menu"></i>我的图片</a></li>
+	<li class="menu-item"><a href="{:mac_url('user/picture')}"><i class="icon-shu iconfont icon-menu"></i>我的小说</a></li>
+	<li class="menu-item"><a href="{:mac_url('user/center')}"><i class="icon-yonghuming iconfont icon-menu"></i>个人中心</a></li>
+	<li class="menu-item"><a href="{:mac_url('user/logout')}"><i class="icon-login iconfont icon-menu"></i>退出</a></li>
+	{else}
+	<div class="slide-user-out-item"><i class="iconfont icon-yonghu"></i></div>
+	<div class="slide-user-out-item"><span id="login_btn" class="btn btn-empty">登录</span></div>
+	<div class="slide-user-out-item"><a href="{:mac_url('user/reg')}" class="btn">注册</a></div>
+	{/if}
+</ul>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="MaDouYm">
+		<title>在线播放{$obj.vod_name} {$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']} - 高清资源 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.vod_name}{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']}免费在线观看,{$obj.vod_name}剧情介绍">
+		<meta name="description" content="{$obj.vod_name}{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']}免费在线观看,{$obj.vod_name}剧情介绍">
+		{include file="system/include"}
+		<link href="{$maccms.path}MDassets/css/video.css" rel="stylesheet" type="text/css"/>
+		<script src="{$maccms.path}MDassets/js/clipboard.min.js"></script>
+	</head>
+	<body>
+		<div id="viewVideo" class="page">
+			<div class="page-content">
+				{include file="system/header"}
+				{include file="module/left_login"}
+				{include file="module/left"}
+				{include file="module/headerad"}
+				<div class="container clearfix view-video-container">
+					<div class="video-wrapper mt20">
+						<div class="video-wrap-div">
+							<div class="rel video-component">
+								{$player_data}{$player_js}
+							</div>
+						</div>
+						<div class="video-active-desc pc-video-active-desc">
+							<div class="video-active-desc-info">
+								<div class="video-active-desc-title">{$obj.vod_name}</div>
+								<div class="about-and-share">
+									<div class="about-and-share-title">
+										<ul>
+											<li class="active"><i class="iconfont icon-guanyu"></i>关于</li>
+											<li class="c9" id="share" data-clipboard-text="{if$maccms.aid==14}{$maccms.http_type}{$maccms.site_url}{:mac_url_vod_detail($obj)}{else}{$maccms.http_type}{$maccms.site_url}{:mac_url_vod_play($obj,['sid'=>$param['sid'],'nid'=>$param['nid']])}{/if} 我正在看《{$obj.vod_name}》，你也快来一起看吧！"><i class="iconfont icon-fenxiang"></i>分享</li>
+											<li onclick="MAC.Gbook.Report('编号【{$obj.vod_id}】名称【{$obj.vod_name}】不能观看请检查修复，页面地址' + location.href,'{$obj.vod_id}')"><i class="iconfont icon-jubao"></i>反馈</li>
+										</ul>
+									</div>
+									<div class="about-and-share-content">
+										<div class="content-item">分类：<a href="{:mac_url_type($obj.type)}" class="category-item">{$obj.type.type_name}</a></div>
+										<div class="content-item">标签：<span class="tagone">{$obj.vod_tag|mac_url_create='tag'}</span>
+										</div>
+										{if$obj['vod_actor'] neq ''}
+										<div class="content-item">演员：
+											{maccms:actor name="'.$obj['vod_actor'].','.$obj['vod_director'].'" order="desc" by="time"}
+											<a href="{$vo|mac_url_actor_detail}" target="_blank" class="high">{$vo.actor_name}</a>
+											{/maccms:actor}
+										</div>
+										{/if}
+										<div class="content-item">添加时间：{$obj.vod_time|date='Y-m-d',###}</div>
+										<div>
+											<div class="pc-hide serviceEmail" style="color: rgb(255, 255, 255);">安卓用户下载<a href="{$GLOBALS['config']['site']['site_app_down']}" class="high">本站APP</a>永不迷路</div>
+											<div class="serviceEmail" style="margin-top: 15px;">发任意邮件至<span class="high">{$maccms.site_email}</span>获取最新地址
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="evaluation">
+									<div class="eval-row1">
+										<span class="zan-cai digg_link" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-mid="{$maccms.mid}" data-type="up"><i class="iconfont icon-zan1"></i>喜欢</span>
+										<span class="zan-cai digg_link" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-mid="{$maccms.mid}" data-type="down"><i class="iconfont icon-buzan"></i>不喜欢</span>
+										<span onclick="vod({$obj.vod_id})" class="zan-cai active"><i class="iconfont icon-asmkticon0242"></i></span>
+									</div>
+									<div class="eval-row2"><span class="high fs16"><span class="mac_hits hits" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}" data-type="hits"></span></span>观看次数
+										<div class="progress">
+											<div style="width:{if empty($obj.vod_up+$obj.vod_down)}100{else/}{:round($obj.vod_up*100/($obj.vod_up+$obj.vod_down))}{/if}%;"></div>
+										</div>
+									</div>
+									<div class="eval-row3">
+										<span>{if empty($obj.vod_up+$obj.vod_down)}100{else/}{:round($obj.vod_up*100/($obj.vod_up+$obj.vod_down))}{/if}%</span>
+										<span><i class="iconfont icon-zan1"></i>{$obj.vod_hits}</span>
+										<span><i class="iconfont icon-buzan"></i>{$obj.vod_down}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="m-video-active-desc">
+							<div class="row">
+								<div class="col s3 digg_link" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-mid="{$maccms.mid}" data-type="up"><i class="iconfont icon-zan1"></i><a class="digg_num">{$obj.vod_up}</a></div>
+								<div class="col s3 digg_link" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-mid="{$maccms.mid}" data-type="down"><i class="iconfont icon-buzan"></i><a class="digg_num">{$obj.vod_down}</a></div>
+								<div class="col s3" onclick="vod({$obj.vod_id})"><i class="iconfont icon-asmkticon0242"></i>收藏</div>
+								<div class="col s3" onclick="MAC.Gbook.Report('编号【{$obj.vod_id}】名称【{$obj.vod_name}】不能观看请检查修复，页面地址' + location.href,'{$obj.vod_id}')"><i class="iconfont icon-jubao"></i>反馈</div>
+							</div>
+							<div class="container">
+								<div class="video-description">
+									<div class="video-description-title-txt">{$obj.vod_name}</div>
+									<div class="video-description-comment"><span><a class="mac_hits hits" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}" data-type="hits"></a>观看</span>
+										<span><i class="iconfont icon-zan1 cGreen"></i>{if empty($obj.vod_up+$obj.vod_down)}100{else/}{:round($obj.vod_up*100/($obj.vod_up+$obj.vod_down))}{/if}%</span>
+										<span id="share" class="c9" data-clipboard-text="{if$maccms.aid==14}{$maccms.http_type}{$maccms.site_url}{:mac_url_vod_detail($obj)}{else}{$maccms.http_type}{$maccms.site_url}{:mac_url_vod_play($obj,['sid'=>$param['sid'],'nid'=>$param['nid']])}{/if} 我正在看《{$obj.vod_name}》，你也快来一起看吧！"><i class="iconfont icon-fenxiang"></i>分享</span>
+									</div>
+									<div class="video-description-desc" style="display: none;">
+										<div class="video-description-category clearfix">
+											<div class="video-description-title">分类：</div>
+											<div class="video-description-info"><a href="{:mac_url_type($obj.type)}"><span>{$obj.type.type_name}</span></a></div>
+										</div>
+										<div class="video-description-category clearfix">
+											<div class="video-description-title">标签：</div>
+											<div class="video-description-info tagtwo">{$obj.vod_tag|mac_url_create='tag'}</div>
+										</div>
+										{if$obj['vod_actor'] neq ''}
+										<div class="video-description-category clearfix">
+											<div class="video-description-title">演员：</div>
+											<div class="video-description-info">
+												{maccms:actor name="'.$obj['vod_actor'].','.$obj['vod_director'].'" order="desc" by="time"}
+												<a href="{$vo|mac_url_actor_detail}" target="_blank" class="high">{$vo.actor_name}</a>
+												{/maccms:actor}
+											</div>
+										</div>
+										{/if}
+										<div class="video-description-time clearfix">
+											<div class="video-description-title">添加时间：</div>
+											<div class="video-description-info">{$obj.vod_time|date='Y-m-d',###}</div>
+										</div>
+									</div>
+									<div id="info" class="showInfo"><span>展开</span></div>
+									<div id="infotwo" class="showInfo" style="display: none;"><span>收拢</span></div>
+									<div>
+										<div class="pc-hide serviceEmail" style="color: rgb(255, 255, 255);">安卓用户下载<a href="{$GLOBALS['config']['site']['site_app_down']}" class="high">本站APP</a>永不迷路</div>
+										<div class="serviceEmail" style="margin-top: 15px;">发任意邮件至<span class="high">{$maccms.site_email}</span>获取最新地址
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="video-wrapper recommend-wrap">
+						<div class="comment-title">
+							
+							<span class="comment-title-span active">相关推荐</span>
+							<span class="comment-title-span">精彩评论</span>
+						</div>
+						<div class="content-comment" style="display: none;">
+							<div class="mac_comment" data-id="{$obj.vod_id}" data-mid="{$maccms.mid}"></div>
+							<script>
+								$(function(){
+									MAC.Comment.Login = {$comment.login};
+									MAC.Comment.Verify = {$comment.verify};
+									MAC.Comment.Init();
+									MAC.Comment.Show(1);
+								});
+							</script>
+						</div>
+						<div class="content-comment">
+							<div class="recommend clearfix">
+								<div class="video-item-row">
+									{maccms:vod num="10" type="current" order="desc" by="time"}
+									{include file="module/vodlist"}
+									{/maccms:vod}
+								</div>
+							</div>
+							<a href="{:mac_url_type($obj.type)}"><div class="show-more cursor">查看更多</div></a>
+						</div>
+						
+					</div>
+				</div>
+				<script>
+					var clipboard = new ClipboardJS('#share');
+					clipboard.on('success', function (e) {
+						layer.msg("复制成功,快去分享吧！");
+					});
+					clipboard.on('error', function (e) {
+					  console.log(e);
+					});
+					
+				</script>
+				{if condition="$obj.vod_level == '6'"}
+				{if condition="$GLOBALS['user']['group_id'] eq 1"}
+				<script>
+				   window.location.href="/";
+				</script>
+				{elseif condition="$GLOBALS['user']['group_id'] eq 2"}
+				<script>
+				   window.location.href="/";
+				</script>
+				{/if}
+				{/if}
+				<span style="display:none" class="mac_ulog_set" alt="设置播放页浏览记录" data-type="4" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}" data-sid="{$param.sid}" data-nid="{$param.nid}"></span>
+				<span style="display:none" class="mac_history_set" alt="设置视频历史记录" data-name="[{$obj.type.type_name}]{$obj.vod_name}" data-pic="{$obj.vod_pic|mac_url_img}"></span>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

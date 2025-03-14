@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="MaDouYm">
+		<title>搜索中心 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+	</head>
+	<body>
+		<div id="home" class="page">
+			<div class="search-page">
+				<div class="nav header mobile-header">
+					<nav>
+						<div class="nav-wrapper">
+							<a onClick="javascript:history.back(-1);" class="back"><i class="iconfont icon-arrows-copy-copy"></i></a>
+							<form id="search" name="search" method="get" action="{:mac_url('vod/search')}" onSubmit="return qrsearch(this);">
+								<div class="input-field">
+									<input id="search" type="search" id="wd" name="wd" placeholder="请输入关键词..." autocomplete="off">
+									<label for="search" class="label-icon active"></label>
+									<a onclick="javascript:document.search.submit()" class="searchBtn"><i class="iconfont icon-sousuo"></i></a>
+								</div>
+							</form>
+						</div>
+					</nav>
+				</div>
+				<div class="container">
+					<div class="history-search">
+						<div class="history-search-title">热门搜索</div>
+						{maccms:foreach name=":explode(',',$maccms.search_hot)" id="vo2" key="key2"}
+						<a href="{:mac_url('vod/search',['wd'=>$vo2])}" class="history-search-list">
+							<span>{$vo2}</span>
+						</a>
+						{/maccms:foreach}
+					</div>
+				</div>
+
+			</div>
+			{include file="system/footer"}
+		</div>
+	</body>
+</html>

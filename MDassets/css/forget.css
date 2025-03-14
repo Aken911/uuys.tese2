@@ -1,0 +1,207 @@
+#forget .forget-wrap {
+	background: url(../img/register_banner.png) no-repeat 50%/cover;
+	padding-top: 70px;
+	padding-bottom: 70px
+}
+
+#forget .forget-wrap .forget-box {
+	padding: 50px;
+	height: 600px;
+	background: #0d0d0d;
+	border: 1px solid #363636
+}
+
+#forget .forget-wrap .forget-box .forget-content .forget-step {
+	width: 550px;
+	margin: auto
+}
+
+#forget .forget-wrap .forget-box .forget-content .forget-step .form-input {
+	width: 300px;
+	margin-left: 20px
+}
+
+#forget .forget-wrap .forget-box .forget-content .forget-step .form-input .input-div {
+	padding-left: 20px
+}
+
+#forget .forget-wrap .forget-box .forget-content .forget-step .form-after .btn {
+	margin-left: 0;
+	width: 120px;
+	margin-top: 0
+}
+
+#forget .forget-wrap .forget-box .forget-content .forget-step .btn {
+	height: 42px;
+	line-height: 42px;
+	width: 300px;
+	margin-top: 15px
+}
+
+#forget .forget-wrap .forget-box .forget-content .forget-step .fotget-step-txt {
+	margin-bottom: 20px
+}
+
+#forget .forget-wrap .forget-box .forget-content .forget-step-1 .btn,
+#forget .forget-wrap .forget-box .forget-content .forget-step-1 .error-form .error-div {
+	margin-left: 130px
+}
+
+#forget .forget-wrap .forget-box .forget-content .forget-step-2 .btn {
+	margin-left: 70px
+}
+
+#forget .forget-wrap .forget-box .forget-content .forget-step-2 .btn.isLoading {
+	cursor: no-drop;
+	opacity: .8;
+	border-color: #363636;
+	color: #949494
+}
+
+#forget .forget-wrap .forget-box .forget-content .forget-step-2 .error-form .error-div {
+	margin-left: 70px
+}
+
+#forget .forget-wrap .forget-box .forget-content .forget-step-3.forget-step .form-label .form-input {
+	margin-bottom: 20px
+}
+
+#forget .forget-wrap .forget-box .forget-content .forget-step-3.forget-step .form-label label {
+	display: inline-block;
+	width: 5em;
+	text-align: right
+}
+
+#forget .forget-wrap .forget-box .forget-content .forget-step-3.forget-step .btn {
+	margin-left: 95px
+}
+
+#forget .forget-wrap .forget-box .forget-content .forget-step-3.forget-step .error-form .error-div {
+	margin-left: 91px
+}
+
+#forget .forget-wrap .forget-box .forget-content .forget-step-4 {
+	text-align: center
+}
+
+#forget .forget-wrap .forget-box .forget-content .forget-step-4 .icon-zhucechenggong {
+	font-size: 80px;
+	color: #f90
+}
+
+#forget .forget-wrap .forget-box .forget-content .forget-step-4 .fotget-step-txt1 {
+	margin-top: 30px;
+	font-size: 24px;
+	margin-bottom: 20px
+}
+
+#forget .error-form .error-div {
+	color: red;
+	margin-left: 84px;
+	height: 40px;
+	line-height: 40px;
+	overflow: hidden
+}
+
+.cGreen {
+	color: #62c655 !important
+}
+
+.cRed {
+	color: red !important
+}
+
+.c0 {
+	color: #000 !important
+}
+
+.cBlue {
+	color: #00f
+}
+
+.c9 {
+	color: #f90 !important
+}
+
+@media screen and (max-width:961px) {
+	#forget .forget-wrap {
+		padding: 0;
+		background: transparent
+	}
+
+	#forget .forget-wrap .container {
+		margin: 0
+	}
+
+	#forget .forget-wrap .container .forget-box {
+		padding: 0
+	}
+
+	#forget .forget-wrap .container .forget-box .forget-content {
+		margin-top: 30px
+	}
+
+	#forget .forget-wrap .container .forget-box .forget-content .forget-step {
+		width: 100%
+	}
+
+	#forget .forget-wrap .container .forget-box .forget-content .forget-step.forget-step-1 .error-form .error-div {
+		margin-left: 106px
+	}
+
+	#forget .forget-wrap .container .forget-box .forget-content .forget-step .btn-div {
+		text-align: center
+	}
+
+	#forget .forget-wrap .container .forget-box .forget-content .forget-step .btn-div .btn.btn-empty {
+		margin-left: auto;
+		margin-right: auto;
+		width: 90%;
+		margin-top: 30px
+	}
+
+	#forget .forget-wrap .container .forget-box .forget-content .forget-step .main-title {
+		font-size: 18px
+	}
+
+	#forget .forget-wrap .container .forget-box .forget-content .forget-step .form-label {
+		padding-left: 20px;
+		border-bottom: 1px solid #363636
+	}
+
+	#forget .forget-wrap .container .forget-box .forget-content .forget-step .form-label.first {
+		border-top: 1px solid #363636
+	}
+
+	#forget .forget-wrap .container .forget-box .forget-content .forget-step .form-label .form-input {
+		width: 200px;
+		margin-bottom: 0;
+		margin-left: 0
+	}
+
+	#forget .forget-wrap .container .forget-box .forget-content .forget-step .form-label .form-input.verify {
+		width: 120px
+	}
+
+	#forget .forget-wrap .container .forget-box .forget-content .forget-step .form-label .form-input .input-div {
+		border-bottom: 0
+	}
+
+	#forget .forget-wrap .container .forget-box .forget-content .forget-step .form-label .form-input .input-div input {
+		height: 46px !important
+	}
+
+	#forget .forget-wrap .container .forget-box .forget-content .forget-step .fotget-step-txt {
+		padding-left: 20px
+	}
+
+	#forget .forget-wrap .container .forget-box .forget-content .forget-step.forget-step-2 .form-label .form-input {
+		width: 120px
+	}
+
+	#forget .forget-wrap .container .forget-box .forget-content .forget-step.forget-step-2 .form-label .form-after {
+		margin-top: 2px;
+		margin-left: 0
+	}
+
+}

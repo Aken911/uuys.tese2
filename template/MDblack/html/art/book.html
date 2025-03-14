@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="MaDouYm">
+		<title>{$obj.art_name} - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.art_name}">
+		<meta name="description" content="{$obj.art_name}">
+		{include file="system/include"}
+		<link href="{$maccms.path}MDassets/css/book.css" rel="stylesheet" type="text/css"/>
+		<script src="{$maccms.path}MDassets/js/clipboard.min.js"></script>
+	</head>
+	<body>
+		<div id="viewNovel" class="page">
+			<div class="page-content">
+			{include file="system/header"}
+			{include file="module/left_login"}
+			{include file="module/left"}
+			{include file="module/headerad"}
+				<div class="container clearfix m-container">
+					<div class="novel-wrap">
+						<div class="novel-div">
+							<div class="novel-img">
+								<img class="madou-lazy" src="{$maccms.path}MDassets/img/loading.png" data-src="{$vo.art_pic|mac_default='MDassets/img/book.png'|mac_url_img}" onerror="javascript:this.src='{$maccms.path}MDassets/img/loading.png'">
+							</div>
+							<div class="novel-info">
+								<div class="novel-title">
+									<span class="high name">《{$obj.art_name}》</span>
+									<span class="right m-hide"><em class="high"><span class="mac_hits hits" data-mid="{$maccms.mid}" data-id="{$obj.art_id}" data-type="hits"></span></em>次阅读</span></div>
+									<div class="novel-info--desc">
+									作者：<span>{$obj.art_author|mac_default='佚名'}</span>
+									</div>
+								<div class="novel-info--desc m-hide">分类：<a href="{:mac_url_type($obj.type)}"><span class="cursor high">{$obj.type.type_name}</span></a></div>
+								<div class="novel-info--desc"><span class="m-hide">更新时间：<span>{$obj.art_time|date='Y-m-d',###}</span></span></div>
+								<div class="novel-info--desc-txt m-hide">{$obj.art_blurb|mac_substring=35}...</div>
+								<div class="novel-info-btn m-hide">
+									<a href="{:mac_url_art_detail($obj)}" class="button">立即阅读</a><span onclick="art({$obj.art_id})" class="button empty">加入收藏</span>
+									<span class="button empty" onclick="MAC.Gbook.Report('编号【{$obj.art_id}】名称【{$obj.art_name}】不能阅读请检查修复，页面地址' + location.href,'{$obj.art_id}')">反馈</span><span id="share" class="button empty" data-clipboard-text="{if$maccms.aid==14}{$maccms.http_type}{$maccms.site_url}{:mac_url_vod_detail($obj)}{else}{$maccms.http_type}{$maccms.site_url}{:mac_url_art_detail($obj)}{/if} 我正在看《{$obj.art_name}》，你也快来一起看吧！"><i class="iconfont icon-fenxiang"></i>分享</span>
+								</div>
+								<div class="novel-evaluate-icon pc-hide">
+									<span>{$obj.art_hits}次阅读</span>
+									<span><i class="iconfont icon-zan1 cGreen"></i>{if empty($obj.art_up+$obj.art_down)}100{else/}{:round($obj.art_up*100/($obj.art_up+$obj.art_down))}{/if}%</span>
+								</div>
+								<div class="pc-hide novel-info-btn m-novel-info-btn"><a href="{:mac_url_art_detail($obj)}" class="button">立即阅读</a></div>
+							</div>
+							<div class="novel-evaluate m-hide">
+								<div class="evaluate">
+									<div class="evaluate-txt">喜欢</div>
+									<div class="evaluate-txt1">{if empty($obj.art_up+$obj.art_down)}100{else/}{:round($obj.art_up*100/($obj.art_up+$obj.art_down))}{/if}%</div>
+									<div class="evaluate-progress"><span style="width:{if empty($obj.art_up+$obj.art_down)}100{else/}{:round($obj.art_up*100/($obj.art_up+$obj.art_down))}{/if}%;"></span></div>
+									<div class="novel-evaluate-icon">
+										<span class="digg_link" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-mid="{$maccms.mid}" data-type="up"><i class="iconfont icon-zan1 cursor"></i>{$obj.art_up}</span>
+										<span class="digg_link" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-mid="{$maccms.mid}" data-type="down"><i class="iconfont icon-buzan cursor"></i>{$obj.art_down}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="pc-hide novel-info-btn">
+							<div class="row">
+								<div class="col s3 digg_link" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-mid="{$maccms.mid}" data-type="up"><i class="iconfont icon-zan1"></i><a class="digg_num">{$obj.art_up}</a></div>
+								
+								<div class="col s3 digg_link" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-mid="{$maccms.mid}" data-type="down"><i class="iconfont icon-buzan"></i><a class="digg_num">{$obj.art_down}</a></div>
+								
+								<div class="col s3" onclick="art({$obj.art_id})"><i class="iconfont icon-asmkticon0242"></i>收藏</div>
+								
+								<div class="col s3" id="share" data-clipboard-text="{if$maccms.aid==14}{$maccms.http_type}{$maccms.site_url}{:mac_url_vod_detail($obj)}{else}{$maccms.http_type}{$maccms.site_url}{:mac_url_art_detail($obj)}{/if} 我正在看《{$obj.art_name}》，你也快来一起看吧！"><i class="iconfont icon-fenxiang"></i>分享</div>
+							</div>
+							<div class="novel-info--desc-txt">
+								<div>分类：<a href="{:mac_url_type($obj.type)}"><span class="cursor high">{$obj.type.type_name}</span></a>
+									<span onclick="MAC.Gbook.Report('编号【{$obj.art_id}】名称【{$obj.art_name}】不能阅读请检查修复，页面地址' + location.href,'{$obj.art_id}')"><i class="iconfont icon-jubao"></i> 反馈</span>
+								</div>
+							</div>
+							<div class="novel-info--desc-txt">
+								<p>内容简介</p>
+								{$obj.art_blurb|mac_substring=30}...
+							</div>
+					
+						</div>
+						<div class="novel-section clearfix">
+							<div class="novel-section-title">
+								<div class="main-title">目录章节</div>
+							</div>
+							<div class="novel-section-list clearfix">
+								<div class="video-item-row">
+									{for start="1" end="$__PAGING__.record_total+1" name="num"}
+									<div class="col-3 video-item-col novel-section-item">
+										<a href="{$__PAGING__.page_url|mac_url_page=$num}">{$obj['art_page_list'][$num]['title']}</a>
+									</div>
+									{/for}
+								</div>
+							</div>
+						</div>
+						<div class="relation-recommend clearfix">
+							<div class="comment-title">
+								<span class="comment-title-span active">相关推荐</span>
+								<span class="comment-title-span">精彩评论</span>
+							</div>
+							<div class="content-comment" style="display: none;">
+								<div class="mac_comment" data-id="{$obj.art_id}" data-mid="{$maccms.mid}"></div>
+								<script>
+									$(function(){
+										MAC.Comment.Login = {$comment.login};
+										MAC.Comment.Verify = {$comment.verify};
+										MAC.Comment.Init();
+										MAC.Comment.Show(1);
+									});
+								</script>
+							</div>		 
+							<div class="content-comment">
+								<div class="video-item-row">
+									{maccms:art num="6" type="current" order="desc" by="time"}
+									<div class="video-item-col col-2">
+										<div class="novel-item">
+											<a href="{:mac_url_art_book($vo)}" class="pc-novel-item">
+												<div class="novel-item-title">
+													<span class="title"><span class="name">《{$vo.art_name}》</span></span>
+													<div class="novel-item-desc">
+														<span class="novel-item-desc__span"><i class="iconfont icon-zan1 cGreen"></i>{if empty($vo.art_up+$vo.art_down)}100{else/}{:round($vo.art_up*100/($vo.art_up+$vo.art_down))}{/if}%</span>
+														<span class="novel-item-desc__span">{$vo.art_hits}观看</span>
+													</div>
+												</div>
+												<div class="novel-item-content">
+													<div class="novel-item-img">
+														<img src="{$maccms.path}MDassets/img/loading.png" data-src="{$vo.art_pic|mac_default='MDassets/img/book.png'|mac_url_img}">
+													</div>
+													<div class="novel-item-content-desc">
+														<div class="novel-item-author">作者：{$vo.art_author|mac_default='佚名'}</div>
+														<div class="novel-item-info">{$vo.art_blurb|mac_filter_html}...</div>
+														<div class="mt15">更新时间：{$vo.art_time|date='Y-m-d',###}</div>
+													</div>
+												</div>
+											</a>
+											<a href="{:mac_url_art_book($vo)}" class="m-novel-item">
+												<div class="m-novel-item-wrap">
+													<div class="novel-item-img">
+														<img src="{$maccms.path}MDassets/img/loading.png" data-src="{$vo.art_pic|mac_default='MDassets/img/book.png'|mac_url_img}">
+													</div>
+													<div class="novel-item-content-desc">
+														<div class="title"><span class="name">《{$vo.art_name}》 </span></div>
+														<div class="novel-item-info">{$vo.art_content|mac_substring=40|mac_filter_html}...</div>
+														<div class="novel-item-author">
+															<div class="novel-item-desc">
+																<span class="novel-item-desc__span">{$vo.art_hits}观看</span>
+																<span class="novel-item-desc__span"><i class="iconfont icon-zan1 cGreen"></i>{if empty($vo.art_up+$vo.art_down)}100{else/}{:round($vo.art_up*100/($vo.art_up+$vo.art_down))}{/if}%</span>
+																<span class="right author">作者：{$vo.art_author|mac_default='佚名'}</span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</a>
+										</div>
+									</div>
+									{/maccms:art}
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<script>
+					var clipboard = new ClipboardJS('#share');
+					clipboard.on('success', function (e) {
+						layer.msg("复制成功,快去分享吧！");
+					});
+					clipboard.on('error', function (e) {
+					  console.log(e);
+					});
+					
+				</script>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="MaDouYm">
+		<title>用户注册 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link href="{$maccms.path}MDassets/css/register.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div id="register" class="page">
+			<div class="page-content">
+				{include file="system/header"}
+				{include file="module/left_login"}
+				{include file="module/left"}
+				<div class="register-wrap">
+					<form method="POST" id="fm">
+						<div class="container">
+							<div class="register-div">
+								<div class="register-title">免费注册</div>
+								<div id="login_btn" class="register-desc m-hide">已有账号?<span>立即登录</span></div>
+								<div class="register-content">
+									<div class="form-input">
+										<div class="input-div user">
+											<input type="text" id="user_name" name="user_name" placeholder="请输入用户名或邮箱">
+										</div>
+									</div>
+									<div class="form-input">
+										<div class="input-div pass">
+											<input type="password" id="user_pwd" name="user_pwd" placeholder="密码,6~18位字符">
+										</div>
+									</div>
+									<div class="form-input">
+										<div class="input-div pass">
+											<input type="password" id="user_pwd2" name="user_pwd2" placeholder="确认密码,6~18位字符">
+										</div>
+									</div>
+									<div class="form-input">
+										<div class="input-div code">
+											<input type="text" id="codes" name="codes" placeholder="邀请码,如无可不填">
+										</div>
+									</div>
+
+									<div id="btn_submit" class="register-btn"><span class="btn">注册</span></div>
+									<div class="register-error form-input"></div>
+									<div id="login_btn" class="register-desc pc-hide">已有账号?<span>立即登录</span></div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				{include file="system/footer"}
+				<script type="text/javascript">
+					var countdown = 60;
+
+					function settime(val) {
+						if (countdown == 0) {
+							val.removeAttribute("disabled");
+							val.value = "获取验证码";
+							countdown = 60;
+							return true;
+						} else {
+							val.setAttribute("disabled", true);
+							val.value = "重新发送(" + countdown + ")";
+							countdown--;
+						}
+						setTimeout(function() {
+							settime(val)
+						}, 1000)
+					}
+
+
+					$("body").bind('keyup', function(event) {
+						if (event.keyCode == 13) {
+							$('#btnLogin').click();
+						}
+					});
+
+					$('#btn_send_sms').click(function() {
+						var ac = $('input[name="ac"]').val();
+						var to = $('input[name="to"]').val();
+						if (ac == 'email') {
+							var pattern = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+							var ex = pattern.test(to);
+							if (!ex) {
+								layer.msg('邮箱格式不正确');
+								return;
+							}
+						} else if (ac == 'phone') {
+							var pattern = /^[1][0-9]{10}$/;
+							var ex = pattern.test(to);
+							if (!ex) {
+								layer.msg('手机格式不正确');
+								return;
+							}
+						} else {
+							layer.msg('参数错误');
+							return;
+						}
+
+
+						settime(this);
+						var data = $("#fm").serialize();
+
+						$.ajax({
+							url: "{:url('user/reg_msg')}",
+							type: "post",
+							dataType: "json",
+							data: data,
+							beforeSend: function() {
+								//开启loading
+							},
+							success: function(r) {
+								layer.msg(r.msg);
+							},
+							complete: function() {
+								//结束loading
+							}
+						});
+					});
+
+					$('#btn_submit').click(function() {
+						if ($('#user_name').val() == '') {
+							layer.msg('请输入登录账号');
+							$("#user_name").focus();
+							return false;
+						}
+						if ($('#user_pwd').val() == '') {
+							layer.msg('请输入登录密码');
+							$("#user_pwd").focus();
+							return false;
+						}
+						if ($('#user_pwd2').val() == '') {
+							layer.msg('请输入确认密码');
+							$("#user_pwd2").focus();
+							return false;
+						}
+						if ($('#verify').val() == '') {
+							layer.msg('请输入验证码');
+							$("#verify").focus();
+							return false;
+						}
+
+						$.ajax({
+							url: "{:url('user/reg')}",
+							type: "post",
+							dataType: "json",
+							data: $('#fm').serialize(),
+							beforeSend: function() {
+								$("#btn_submit").val("loading...");
+							},
+							success: function(r) {
+								layer.msg(r.msg);
+								if (r.code == 1) {
+									location.href = "{:url('user/login')}";
+								} else {
+									$('#verify_img').click();
+								}
+							},
+							complete: function() {
+								$("#btn_submit").val("立即注册");
+							}
+						});
+
+					});
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

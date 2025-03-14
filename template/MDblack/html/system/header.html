@@ -1,0 +1,153 @@
+<div class="header nav navbar-fixed ">
+		<div class="container pc-header">
+			<div class="header-menu clearfix">
+				<ul>
+					<li>
+						<a href="{$maccms.path}">
+							<div class="logo"><img src="{$maccms.site_logo|mac_url_img}"></div>
+						</a>
+					</li>
+					<li class="menu-item {if condition="$maccms.aid eq 1"}active{/if}">
+						<a href="{$maccms.path}">首页</a>
+					</li>
+					{maccms:type ids="parent" order="asc" by="sort"}
+					<li class="menu-item {if condition="($vo.type_id eq $GLOBALS['type_id'] || $vo.type_id eq $GLOBALS['type_pid'])"}active{/if}">
+						<a href="{:mac_url_type($vo)}">{$vo.type_name}</a>
+					</li>
+					{/maccms:type}
+					<li class="menu-item">
+						<a href="{$GLOBALS['config']['site']['site_app_down']}">本站APP</a>
+					</li>
+					<li>
+						<div class="search-dev">
+							<form id="search" name="search" method="get" action="{:mac_url('vod/search')}">
+								<input type="text" name="wd" placeholder="请输入关键词..." class="search-input">
+								<div onclick="javascript:document.search.submit()" class="search-btn"><i class="iconfont icon-sousuo"></i></div>
+							</form>
+						</div>
+					</li>
+					{if condition="$GLOBALS['user']['user_id']" gt 0}
+					<li class="right-menu-item">
+						<div class="user-info-login">
+							<a href="{:mac_url('user/index')}" class="user-info-login-center"><i class="iconfont icon-yonghuming"></i><span>会员中心</span><i class="iconfont icon-sanjiaoxing"></i>
+								<span class="dot" style="display: none;"></span>
+							</a>
+							<div class="user-center-dropdown">
+								<a href="{:mac_url('user/index')}" class="user-center-dropdown-item">任务</a>
+								<a href="{:mac_url('user/favs')}" class="user-center-dropdown-item">视频</a>
+								<a href="{:mac_url('user/picture')}" class="user-center-dropdown-item">图片</a>
+								<a href="{:mac_url('user/novel')}" class="user-center-dropdown-item">小说</a>
+								<a href="{:mac_url('user/share')}" class="user-center-dropdown-item">分享</a>
+								<a href="{:mac_url('user/logout')}" class="user-center-dropdown-item">退出</a>
+							</div>
+						</div>
+					</li>
+					{else}
+					<li class="right-menu-item">
+						<div class="user-info">
+							<span id="login_btn" class="login-btn empty">登录</span>
+							<a href="{:mac_url('user/reg')}" class="login-btn">注册</a>
+						</div>
+					</li>
+					{/if}
+				</ul>
+			</div>
+		</div>
+		<div class="mobile-header">
+			<nav>
+				<div class="nav-wrapper">
+					<a href="javascript:void(0)" data-target="slide-out" class="sidenav-trigger left-icon">
+						<i id="menu-open" class="iconfont icon-caidan- high"></i>
+					</a>
+					<a href="/" class="brand-logo center">
+						<img class="logo" src="{$maccms.site_logo|mac_url_img}">
+					</a>
+					<a href="{:mac_url('label/search')}" class="right header-right-icon">
+						<i class="iconfont icon-sousuo"></i>
+					</a>
+					
+					<a href="javascript:void(0)" data-target="slide-userInfo-out" class="right header-right-user sidenav-trigger">
+						<i id="user-open" class="iconfont icon-yonghuming {if condition="$GLOBALS['user']['user_id']" gt 0}high{/if}"></i>
+					</a>
+				</div>
+			</nav>
+		</div>
+</div>
+<div id="login" class="login-modal-wrap v--modal-overlay" style="display: none;">
+	<div class="v--modal-background-click">
+		<div class="v--modal-top-right"></div>
+		<div class="v--modal-box v--modal" style="top: 307px; margin: auto; width: 384px; height: 300px;">
+			<div class="login-modal">
+				<div class="login-modal-title">登录<i class="iconfont icon-guanbi"></i></div>
+				<form id="madouym-login" class="login-modal-content">
+					<div class="form-input">
+						<div class="input-div user">
+							<input type="text" id="login_name" name="user_name" placeholder="用户名或邮箱">
+						</div>
+					</div>
+					<div class="form-input">
+						<div class="input-div pass">
+							<input type="password" id="login_pwd" name="user_pwd" placeholder="密码">
+						</div>
+					</div>
+					<div class="login-label"><label><input type="checkbox" class="filled-in"><span>记录帐号(不建议在公共计算机上记住)</span></label></div>
+					<div id="btn_login" class="login-modal-btn"><span class="btn">登录</span></div>
+				</form>
+				<div class="login-modal-footer">
+					<a href="{:mac_url('user/findpass')}">忘记密码?</a>
+					<span class="register-a">还没有账号?<a href="{:mac_url('user/reg')}">立即注册</a></span>
+				</div>
+				<div class="svip-active activity pc-hide">
+					<div class="svip-active-title">
+						特别活动
+					</div>
+					<div class="svip-active-content">
+						<div class="svip-active-txt"> 邀请好友完成注册<br>即可升级为 <span class="txt1">VIP</span></div>
+						<div class="svip-active-txt2">
+							<div class="txt2">
+								·永久免费
+							</div>
+							<div class="txt2">
+								·无限制观看
+							</div>
+							<div class="txt2">
+								·高速下载
+							</div>
+							<div class="txt2">
+								·免广告
+							</div>
+							<div class="txt2">·评论</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+$(function(){
+	$('#btn_login').click(function() {
+		if ($('#login_name').val()  == '') { layer.msg('请输入用户！'); $("#login_name").focus(); return false; }
+		if ($('#login_pwd').val()  == '') { layer.msg('请输入密码！'); $("#login_pwd").focus(); return false; }
+		$.ajax({
+			url: "{:mac_url('user/login')}",
+			type: "post",
+			dataType: "json",
+			data: $('#madouym-login').serialize(),
+			beforeSend: function () {
+				$("#btn_login").val("登录中...");
+			},
+			success: function (r) {
+				if(r.code==1){
+					location.href="{:mac_url('user/index')}";
+				}
+				else{
+					layer.msg(r.msg);
+					$('#verify_img').click();
+				}
+			}
+		});
+	});
+});
+</script>
+

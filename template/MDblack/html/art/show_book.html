@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="MaDouYm">
+		<title>{$obj.type_title} - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.type_key}">
+		<meta name="description" content="{$obj.type_des}">
+		{include file="system/include"}
+		<link href="{$maccms.path}MDassets/css/book.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div id="novel" class="page">
+			<div class="page-content has-sub-header">
+				{include file="system/header"}
+				{include file="module/left_login"}
+				{include file="module/left"}
+				{include file="module/headerad"}
+				<div class="pc-hide">
+					<div class="catetory-and-sort sub-header-menu">
+						<div class="catetory-and-sort-wrap">
+							<div class="cate-item">
+								<div id="sort" class="cate-item-title iconfont">分类</div>
+								<ul id="sorttwo" class="cate-item-list" style="display: none;">
+									{if condition="$obj.type_pid eq 0"}
+									{maccms:type order="asc" by="sort" ids="'.$obj['type_id'].'"}
+									<a href="{:mac_url_type($vo)}">
+										<li class="cate-item-li {if condition=" $obj.type_id eq $vo.type_id" }active{/if}">全部 </li> 
+									</a> 
+									{/maccms:type}
+									{else} 
+									{maccms:type order="asc" by="sort" ids="'.$obj['type_pid'].'" } 
+									<a href="{:mac_url_type($vo)}">
+										<li class="cate-item-li {if condition=" $obj.type_id eq $vo.type_id" }active{/if}">全部 </li>
+									</a> 
+									{/maccms:type}
+									{/if} 
+									{if condition="$obj.type_pid eq 0" } 
+									{maccms:type ids="'.$obj['type_id'].'" order="asc" by="sort" id="vo1" key="key1" } 
+									{maccms:type parent="'.$vo1['type_id'].'" order="asc" by="sort" id="vo2" key="key2" } 
+									<a href="{:mac_url_type($vo2)}">
+										<li class="cate-item-li {if condition=" $obj.type_id eq $vo2.type_id" }active{/if}">{$vo2.type_name} </li> 
+									</a>
+									{/maccms:type} 
+									{/maccms:type} 
+									{else} 
+									{maccms:type ids="'.$obj['type_pid'].'" order="asc" by="sort" id="vo1" key="key1" } 
+									{maccms:type parent="'.$vo1['type_id'].'" order="asc" by="sort" id="vo2" key="key2" } 
+									<a href="{:mac_url_type($vo2)}">
+										<li class="cate-item-li {if condition=" $obj.type_id eq $vo2.type_id" }active{/if}">{$vo2.type_name} </li>
+									</a>
+									{/maccms:type} 
+									{/maccms:type} 
+									{/if} 
+								</ul>
+							</div>
+							<div class="cate-item">
+								<div id="order" class="cate-item-title iconfont">排序</div>
+								<ul id="ordertwo" class="cate-item-list" style="display: none;">
+									<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'time' ],'show')}">
+										<li class="cate-item-li {if condition=" $param.by eq '' || $param.by eq 'time'"}active{/if}">最新</li>
+									</a>
+									<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'hits' ],'show')}">
+										<li class="cate-item-li {if condition=" $param.by eq 'hits'"}active{/if}">最热</li>
+									</a>
+									<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'score' ],'show')}">
+										<li class="cate-item-li {if condition=" $param.by eq 'score'"}active{/if}">评分</li>
+									</a>
+								</ul>
+							</div>
+						</div>
+						<div class="row cate-label-list" style="display: none;"></div>
+					</div>
+				</div>
+				<div class="container clearfix">
+					<div class="pc-novel-main-title">
+						<div class="main-title">小说
+							<div class="sort">
+								<span>排列方式: </span>
+								<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'time' ],'show')}" class="sort-item {if condition=" $param.by eq '' || $param.by eq 'time'"}active{/if}">最新</a>
+								<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'hits' ],'show')}" class="sort-item {if condition=" $param.by eq 'hits'"}active{/if}">最热</a>
+								<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'score' ],'show')}" class="sort-item {if condition=" $param.by eq 'score'"}active{/if}">评分</a>
+							</div>
+						</div>
+					</div>
+					<div class="container m-hide">
+						<div class="category-wrap">
+							<div class="category-title">分类:</div>
+							<div class="category-list">
+							{if condition="$obj.type_pid eq 0"}
+							{maccms:type order="asc" by="sort" ids="'.$obj['type_id'].'"}
+							<a href="{:mac_url_type($vo)}" class="category-item {if condition=" $obj.type_id eq $vo.type_id" }active{/if}">全部</a>
+							{/maccms:type}
+							{else}
+							{maccms:type order="asc" by="sort" ids="'.$obj['type_pid'].'"}
+							<a href="{:mac_url_type($vo)}" class="category-item {if condition=" $obj.type_id eq $vo.type_id" }active{/if}">全部</a>
+							{/maccms:type}
+							{/if}
+							{if condition="$obj.type_pid eq 0"}
+							{maccms:type ids="'.$obj['type_id'].'" order="asc" by="sort" id="vo1" key="key1"}
+							{maccms:type parent="'.$vo1['type_id'].'" order="asc" by="sort" id="vo2" key="key2"}
+							<a href="{:mac_url_type($vo2)}" class="category-item {if condition=" $obj.type_id eq $vo2.type_id" }active{/if}">{$vo2.type_name}</a>
+							{/maccms:type} 
+							{/maccms:type} 
+							{else} 
+							{maccms:type ids="'.$obj['type_pid'].'" order="asc" by="sort" id="vo1" key="key1" } 
+							{maccms:type parent="'.$vo1['type_id'].'" order="asc" by="sort" id="vo2" key="key2" }
+							<a href="{:mac_url_type($vo2)}" class="category-item {if condition=" $obj.type_id eq $vo2.type_id" }active{/if}">{$vo2.type_name}</a>
+							{/maccms:type} 
+							{/maccms:type} 
+							{/if} 
+						</div>
+						</div>
+					</div>
+					<div class="novel-list-wrap">
+						<div class="video-item-row clearfix">
+							{maccms:art num="18" paging="yes" pageurl="art/type" order="desc" by="time"}
+							<div class="video-item-col col-3">
+								<div class="novel-item">
+									<a href="{:mac_url_art_book($vo)}" class="pc-novel-item">
+										<div class="novel-item-title">
+											<span class="title"><span class="name">《{$vo.art_name}》</span><span>已完结</span></span>
+											<div class="novel-item-desc">
+												<span class="novel-item-desc__span"><i class="iconfont icon-zan1 cGreen"></i>{$vo.art_up}</span>
+												<span class="novel-item-desc__span">{$vo.art_hits}观看</span>
+											</div>
+										</div>
+										<div class="novel-item-content">
+											<div class="novel-item-img">
+												<img src="{:mac_url_img($vo.art_pic)}">
+											</div>
+											<div class="novel-item-content-desc">
+												<div class="novel-item-author">作者：{$vo.art_author|mac_default='佚名'}</div>
+												<div class="novel-item-info">{$vo.art_content|mac_substring=115}...</div>
+												
+												<div class="mt15">更新时间：{$vo.art_time|date='Y-m-d',###}</div>
+											</div>
+										</div>
+									</a>
+									<a href="{:mac_url_art_book($vo)}" class="m-novel-item">
+										<div class="m-novel-item-wrap">
+											<div class="novel-item-img">
+												<img class="madou-lazy" src="{$maccms.path}MDassets/img/loading.png" data-src="{$vo.art_pic|mac_default='MDassets/img/book.png'|mac_url_img}" onerror="javascript:this.src='{$maccms.path}MDassets/img/loading.png'">
+											</div>
+											<div class="novel-item-content-desc">
+												<div class="title"><span class="name">《{$vo.art_name}》 </span><span>已完结</span></div>
+												<div class="novel-item-info">{$vo.art_content|mac_substring=50}...</div>
+												<div class="novel-item-author">
+													<div class="novel-item-desc">
+														<span class="novel-item-desc__span">{$vo.art_hits}观看</span>
+														<span class="novel-item-desc__span"><i class="iconfont icon-zan1 cGreen"></i>{$vo.art_up}</span>
+														<span class="right author">作者：{$vo.art_author|mac_default='佚名'}</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</div>
+							</div>
+							{/maccms:art}
+						</div>
+						{include file="system/paging"}
+					</div>
+				</div>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="MaDouYm">
+		<title>最新{$obj.type_title}-推荐{$obj.type_title}-第{$param.page}页 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.type_key}">
+		<meta name="description" content="{$obj.type_des}">
+		{include file="system/include"}
+		<link href="{$maccms.path}MDassets/css/sort.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div id="videos" class="page">
+			<div class="page-content has-sub-header">
+				{include file="system/header"}
+				{include file="module/left_login"}
+				{include file="module/left"}
+				{include file="module/headerad"}
+				<div class="pc-hide">
+					<div class="catetory-and-sort sub-header-menu">
+						<div class="catetory-and-sort-wrap">
+							<div class="cate-item">
+								<div id="sort" class="cate-item-title iconfont">分类</div>
+								<ul id="sorttwo" class="cate-item-list" style="display: none;">
+									{if condition="$obj.type_pid eq 0"}
+									{maccms:type order="asc" by="sort" ids="'.$obj['type_id'].'"}
+									<a href="{:mac_url_type($vo)}">
+										<li class="cate-item-li {if condition=" $obj.type_id eq $vo.type_id" }active{/if}">全部 </li> 
+									</a> 
+									{/maccms:type}
+									{else} 
+									{maccms:type order="asc" by="sort" ids="'.$obj['type_pid'].'" } 
+									<a href="{:mac_url_type($vo)}">
+										<li class="cate-item-li {if condition=" $obj.type_id eq $vo.type_id" }active{/if}">全部 </li>
+									</a> 
+									{/maccms:type}
+									{/if} 
+									{if condition="$obj.type_pid eq 0" } 
+									{maccms:type ids="'.$obj['type_id'].'" order="asc" by="sort" id="vo1" key="key1" } 
+									{maccms:type parent="'.$vo1['type_id'].'" order="asc" by="sort" id="vo2" key="key2" } 
+									<a href="{:mac_url_type($vo2)}">
+										<li class="cate-item-li {if condition=" $obj.type_id eq $vo2.type_id" }active{/if}">{$vo2.type_name} </li> 
+									</a>
+									{/maccms:type} 
+									{/maccms:type} 
+									{else} 
+									{maccms:type ids="'.$obj['type_pid'].'" order="asc" by="sort" id="vo1" key="key1" } 
+									{maccms:type parent="'.$vo1['type_id'].'" order="asc" by="sort" id="vo2" key="key2" } 
+									<a href="{:mac_url_type($vo2)}">
+										<li class="cate-item-li {if condition=" $obj.type_id eq $vo2.type_id" }active{/if}">{$vo2.type_name} </li>
+									</a>
+									{/maccms:type} 
+									{/maccms:type} 
+									{/if} 
+								</ul> 
+							</div> 
+							<div class="cate-item">
+								<div id="tag" class="cate-item-title iconfont">标签</div>
+							</div>
+							<div class="cate-item">
+								<div id="order" class="cate-item-title iconfont">排序</div>
+								<ul id="ordertwo" class="cate-item-list" style="display: none;">
+
+									<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'time' ],'show')}">
+										<li class="cate-item-li {if condition=" $param.by eq '' || $param.by eq 'time'"}active{/if}">最新</li>
+									</a>
+									<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'hits' ],'show')}">
+										<li class="cate-item-li {if condition=" $param.by eq 'hits'"}active{/if}">最热</li>
+									</a>
+									<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'score' ],'show')}">
+										<li class="cate-item-li {if condition=" $param.by eq 'score'"}active{/if}">评分</li>
+									</a>
+
+								</ul>
+							</div>
+						</div>
+						<div id="tags" class="row cate-label-list tag" style="display: none;">
+							{maccms:vod order="desc" by="time" num="26" type="'.$obj['type_id'].'"}
+							{if condition="$vo.vod_tag eq ''"}
+							{else}
+							{$vo.vod_tag|mac_url_create='tag'}
+							{/if}
+							{/maccms:vod}
+						</div>
+					</div>
+				</div>
+				<div class="container clearfix">
+					<div class="pc-videos-main-title">
+						<div class="main-title">分类
+							<div class="sort">排列方式
+								<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'time' ],'show')}" class="sort-item {if condition=" $param.by eq '' || $param.by eq 'time'"}active{/if}">最新</a>
+								<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'hits' ],'show')}" class="sort-item {if condition=" $param.by eq 'hits'"}active{/if}">最热</a>
+								<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'score' ],'show')}" class="sort-item {if condition=" $param.by eq 'score'"}active{/if}">评分</a>
+							</div>
+						</div>
+					</div>
+					<div class="pc-label-list label-list left">
+						<div class="label-list-wrap">
+							<div>
+								<ul>
+									{if condition="$obj.type_pid eq 0"}
+									{maccms:type order="asc" by="sort" ids="'.$obj['type_id'].'"}
+									<a href="{:mac_url_type($vo)}">
+										<li class="categoryListNode {if condition=" $obj.type_id eq $vo.type_id" }active{/if}">全部 <span>({:mac_data_count(0,'all','vod')})</span></li>
+									</a>
+									{/maccms:type}
+									{else}
+									{maccms:type order="asc" by="sort" ids="'.$obj['type_pid'].'"}
+									<a href="{:mac_url_type($vo)}">
+										<li class="categoryListNode {if condition=" $obj.type_id eq $vo.type_id" }active{/if}">全部 <span>({:mac_data_count(0,'all','vod')})</span></li>
+									</a>
+									{/maccms:type}
+									{/if}
+
+									{if condition="$obj.type_pid eq 0"}
+									{maccms:type ids="'.$obj['type_id'].'" order="asc" by="sort" id="vo1" key="key1"}
+									{maccms:type parent="'.$vo1['type_id'].'" order="asc" by="sort" id="vo2" key="key2"}
+									<a href="{:mac_url_type($vo2)}">
+										<li class="categoryListNode {if condition=" $obj.type_id eq $vo2.type_id" }active{/if}">{$vo2.type_name} </li>
+									</a> 
+									{/maccms:type} 
+									{/maccms:type} 
+									{else} 
+									{maccms:type ids="'.$obj['type_pid'].'" order="asc" by="sort" id="vo1" key="key1" } 
+									{maccms:type parent="'.$vo1['type_id'].'" order="asc" by="sort" id="vo2" key="key2" }
+									<a href="{:mac_url_type($vo2)}">
+										<li class="categoryListNode {if condition=" $obj.type_id eq $vo2.type_id" }active{/if}">{$vo2.type_name} </li>
+									</a> 
+									{/maccms:type} 
+									{/maccms:type} 
+									{/if} 
+								</ul> 
+							</div> 
+							</div> 
+							<div class="main-title">标签</div>
+							<div class="label-list-wrap">
+								<div>
+									<ul class="tags">
+										{maccms:vod order="desc" by="time" num="26" type="'.$obj['type_id'].'"}
+										{if condition="$vo.vod_tag eq ''"}
+										{else}
+										{$vo.vod_tag|mac_url_create='tag'}
+										{/if}
+										{/maccms:vod}
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="videos-list-wrap">
+							<div style="">
+								<div class="video-item-row">
+									{maccms:vod num="32" paging="yes" pageurl="vod/type" order="desc" by="time"}
+									{include file="module/vodlist"}
+									{/maccms:vod}
+								</div>
+								{include file="system/paging"}
+							</div>
+						</div>
+					</div>
+					{include file="system/footer"}
+				</div>
+			</div>
+	</body>
+</html>

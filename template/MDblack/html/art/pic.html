@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="MaDouYm">
+		<title>{$obj.art_name} - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.art_name}">
+		<meta name="description" content="{$obj.art_name}">
+		{include file="system/include"}
+		<link href="{$maccms.path}MDassets/css/picture.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div id="picture_list" class="page">
+			<div class="page-content">
+				{include file="system/header"}
+				{include file="module/left_login"}
+				{include file="module/left"}
+				{include file="module/headerad"}
+				<div class="container">
+					<div class="main-title">{$obj.art_name}</div>
+					<div class="sub-title"><span>分类:{$obj.type.type_name}</span><span>上传时间: {$obj.art_time|date='Y-m-d',###}</span>
+						<div class="sub-title-display"><span>{$obj.art_hits}观看</span><span><i class="iconfont icon-zan1 cGreen"></i>{if empty($obj.art_up+$obj.art_down)}100{else/}{:round($obj.art_up*100/($obj.art_up+$obj.art_down))}{/if}%</span></div>
+					</div>
+				</div>
+				<div class="container clearfix">
+					<div class="picture-wrap">
+						<div id="picture-item-row" class="picture-item-row">
+							{for start="1" end="$__PAGING__.record_total+1" name="num"}
+							<div class="picture-item-box">
+								<div class="picture-item" >
+									<a href="{$__PAGING__.page_url|mac_url_page=$num}" target="_blank">
+										<img class="madou-lazy" src="{$maccms.path}MDassets/img/loading.png" data-src="{$obj['art_page_list'][$num]['note']}" onerror="javascript:this.src='{$maccms.path}MDassets/img/loading.png'">
+									</a>
+									<div class="picture-desc">
+										<div class="title">
+											{$obj.art_name}
+										</div>
+									</div>
+								</div>
+							</div>
+							{/for}
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

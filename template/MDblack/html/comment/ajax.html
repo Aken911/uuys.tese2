@@ -1,0 +1,78 @@
+<div class="comment">
+	{if condition="$GLOBALS['user']['user_id']" gt 0}
+	<form>
+		<input type="hidden" name="comment_pid" value="0">
+		<div class="comment-input-div">
+			<textarea name="comment_content" placeholder="我来说两句(200字)......" class="comment-input"></textarea>
+			<div class="comment-btn comment_submit">发表</div>
+		</div>
+	</form>
+	{/if}
+	{maccms:comment num="5" paging="yes" order="desc" by="id"}
+	{/maccms:comment}
+	<div class="comment-content">
+		<div class="comment-content-title">
+			全部评论({$__PAGING__.record_total})
+			{if condition="$__PAGING__.record_total gt 0"}
+			<div class="right">
+				<span class="comment-sort active">{$__PAGING__.page_current}</span>/<span class="comment-sort">{$__PAGING__.page_total}</span>
+			</div>
+			{/if}
+		</div>
+		<div class="comment-list">
+			{maccms:foreach name="__LIST__" id="vo"}
+			<div class="comment-item clearfix">
+				<div class="comment-item-avatar">
+					<i class="iconfont icon-yonghu"></i>
+				</div>
+				<div class="comment-item-content">
+					<div class="comment-item-title">
+						<span class="name">{$vo.comment_name}</span>
+						<span class="time">{$vo.comment_time|date='m-d',###}</span>
+						<span class="time digg_link" data-id="{$vo.comment_id}" data-mid="4" data-type="up"><i class="iconfont icon-zan1 cursor"></i>
+							{$vo.comment_up}</span>
+						<span class="time digg_link" data-id="{$vo.comment_id}" data-mid="4" data-type="down"><i class="iconfont icon-buzan cursor"></i>
+							{$vo.comment_down}</span>
+					</div>
+					<div class="comment-item-info">
+						{$vo.comment_content|mac_em_replace}
+					</div>
+				</div>
+			</div>
+			{/maccms:foreach}
+			{if condition="$__PAGING__.record_total gt 0"}
+			<div class="mb30 pagging-div clearfix center">
+				<ul class="mo-paging">
+					<a href="javascript:void(0);" onclick="MAC.Comment.Show('{$__PAGING__.page_prev}')" class="paging-item paging-item--prev">上一页</a>
+					<div class="paging-item-wrap">
+						<div class="paging-item-wrap-div">
+							{maccms:foreach name="$__PAGING__.page_num" id="num"}
+							{if condition="$__PAGING__['page_current'] eq $num"}
+							<a href="javascript:;" class="paging-item paging-item--current">{$num}</a>
+							{else}
+							<a href="javascript:void(0);" onclick="MAC.Comment.Show('{$num}')" class="paging-item">{$num}</a>
+							{/if}
+							{/maccms:foreach}
+							<li class="paging-item paging-item--more">...</li>
+							<li class="paging-item paging-item--last">{$__PAGING__.page_total}</li>
+						</div>
+					</div>
+					<a href="javascript:void(0);" onclick="MAC.Comment.Show('{$__PAGING__.page_next}')" class="paging-item paging-item--next">下一页</a>
+					<li class="paging-jump m-hide">
+						<div class="padding-jump-div">
+							<span>转到</span><input type="text" id="page"><span>页</span>
+							<span class="btn" onclick="MAC.Comment.Show($('#page').val())">确定</span>
+						</div>
+					</li>
+				</ul>
+			</div>
+			{else/}
+			{if condition="$GLOBALS['user']['user_id']" gt 0}
+			<div class="no-data-txt">还没有评论，快来评论吧</div>
+			{else}
+			<div class="no-data-txt">请先登录，登录后再来评论吧</div>
+			{/if}
+			{/if}
+		</div>
+	</div>
+</div>

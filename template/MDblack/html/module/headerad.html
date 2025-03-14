@@ -1,0 +1,11 @@
+{if condition="$GLOBALS['config']['site']['site_header_status'] eq 1"}
+<div class="container banner">
+	{maccms:website num="200" order="desc" type="'.($GLOBALS['config']['site']['site_header_id']).'" by="time"}
+	<a href="{$vo.website_jumpurl}" target="_blank">
+		<div class="immediately-block">
+			<img src="{:mac_url_img($vo.website_logo)}" style="width: 100%; height: 100px;">
+		</div>
+	</a>
+	{/maccms:website}
+</div>
+{/if}

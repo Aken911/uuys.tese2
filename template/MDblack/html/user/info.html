@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="MaDouYm">
+		<title>重置密码 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link href="{$maccms.path}MDassets/css/user.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div id="usercenter" class="page">
+			<div class="page-content">
+				{include file="system/header"}
+				{include file="module/left_login"}
+				{include file="module/left"}
+				<div class="container">
+					{include file="user/menu"}
+					<div class="clearfix usercenter-page">
+						<div class="update_password usercenter-box child-view">
+							<div class="pc-hide main-title">修改密码</div>
+							<div class="update_password-content update-content">
+							<form id="fm" name="fm" method="post" action="" >
+								<div class="update-step update-step-1">
+									<div class="form-label">
+										<label>原密码: </label>
+										<div class="form-input">
+											<div class="input-div">
+												<input type="password" name="user_pwd" placeholder="请输入原登录密码">
+											</div>
+										</div>
+									</div>
+									<div class="form-label">
+										<label>新密码: </label>
+										<div class="form-input">
+											<div class="input-div">
+												<input type="password" name="user_pwd1" placeholder="请输入新登录密码">
+											</div>
+										</div>
+									</div>
+									<div class="form-label">
+										<label>确认密码: </label>
+										<div class="form-input">
+											<div class="input-div">
+												<input type="password" name="user_pwd2" placeholder="再次输入登录密码">
+											</div>
+										</div>
+									</div>
+									<div class="form-label">
+										<label>找回问题: </label>
+										<div class="form-input">
+											<div class="input-div">
+												<input type="text" name="user_question" value="{$obj.user_question}" placeholder="请输入找回密码问题">
+											</div>
+										</div>
+									</div>
+									<div class="form-label">
+										<label>找回答案: </label>
+										<div class="form-input">
+											<div class="input-div">
+												<input type="text" name="user_answer" value="{$obj.user_answer}" placeholder="请输入找回密码答案">
+											</div>
+										</div>
+									</div>
+									<div id="btn_submit"><span class="btn btn-empty">下一步</span></div>
+								</div>
+							</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+				<script type="text/javascript">
+					$('.btn_unbind').click(function(){
+						var ac = $(this).attr('ac');
+						if(ac!='email' && ac!='phone'){
+							layer.msg('参数错误');
+						}
+						if(confirm('确认解除绑定吗？此操作不可恢复？')) {
+							$.ajax({
+								url: "{:url('user/unbind')}",
+								type: "post",
+								dataType: "json",
+								data: {ac: ac},
+								beforeSend: function () {
+									//开启loading
+								},
+								success: function (r) {
+									layer.msg(r.msg);
+									if(r.code==1){
+										location.href="{:url('user/info')}";
+									}
+								},
+								complete: function () {
+									//结束loading
+								}
+							});
+						}
+					});
+					$("#btn_submit").click(function() {
+						var data = $("#fm").serialize();
+						$.ajax({
+							url: "{:url('user/info')}",
+							type: "post",
+							dataType: "json",
+							data: data,
+							beforeSend: function () {
+								//开启loading
+								//$(".loading_box").css("display","block");
+								$("#btn_submit").val("loading...");
+							},
+							success: function (r) {
+								layer.msg(r.msg);
+								if(r.code==1){
+									location.href="{:url('user/info')}";
+								}
+							},
+							complete: function () {
+								//结束loading
+								//$(".loading_box").css("display","none");
+								$("#btn_submit").val("提交");
+							}
+						});
+					});
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

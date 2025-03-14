@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="MaDouYm">
+		<title>视频收藏 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link href="{$maccms.path}MDassets/css/user.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div id="usercenter" class="page">
+			<div class="page-content">
+				{include file="system/header"}
+				{include file="module/left_login"}
+				{include file="module/left"}
+				<div class="container">
+					{include file="user/menu"}
+					<div class="clearfix usercenter-page">
+						<div class="my-video child-view">
+							<div class="pc-hide main-title">我的视频</div>
+							<div class="video-item-row clearfix">
+								{if condition="$__PAGING__.record_total gt 0"}
+								{volist name="list" id="vo"}
+								{if condition="$vo.ulog_mid eq 1"}
+								{maccms:vod order="desc" by="time" ids="'.$vo['ulog_rid'].'" type="'.($GLOBALS['config']['site']['site_video_id']).'" id="vo1" key="key1"}
+								<div class="video-item-col col-5">
+									<div class="video-item">
+										<a href="{$vo.data.link}" class="video-img">
+											<div class="pre-img">
+												<img src="{$maccms.path}MDassets/img/loading.png" data-src="{:mac_url_img($vo1.vod_pic)}">
+												<div class="video-img-desc">
+													<div class="right">{$vo1.vod_remarks} {$vo1.vod_duration|mac_default='00:00'}</div>
+												</div>
+											</div>
+										</a>
+										<div class="video-desc">
+											<div class="video-desc-content">{$vo1.vod_name}</div>
+											<div class="video-desc-comment">
+												<span>{$vo1.vod_hits}观看</span>
+												<span><i class="iconfont icon-zan1 cGreen"></i>{if empty($vo1.vod_up+$vo1.vod_down)}100{else/}{:round($vo1.vod_up*100/($vo1.vod_up+$vo1.vod_down))}{/if}%</span>
+												<span onclick="delData({$vo.ulog_id},0)"><i class="iconfont icon-asmkticon0242 cursor high"></i></span>
+											</div>
+										</div>
+									</div>
+								</div>
+								{/maccms:vod}
+								{/if}
+								{/volist}
+								{else/}
+								<div class="no-data">
+									<div class="no-data-img"></div>
+									<div class="no-data-txt">没有收藏。。。</div>
+								</div>
+								{/if}
+								{include file="system/paging"}
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+				<script>
+					function delData(ids, all) {
+						var msg = '删除';
+						if (all == 1) {
+							msg = '清空';
+						}
+						$.post("{:url('user/ulog_del')}", {
+							ids: ids,
+							type: 2,
+							all: all
+						}, function(data) {
+							if (data.code == '1') {
+								layer.msg("删除成功");
+								setTimeout("location.reload()", 3000);
+							} else {
+								layer.msg('删除失败：' + data.msg);
+							}
+						}, 'json')
+
+					}
+					$("#btnClear").click(function() {
+						delData('', 1);
+					});
+					$("#btnDel").click(function() {
+						var ids = MAC.CheckBox.Ids('ids[]');
+						if (ids == '') {
+							layer.msg('请至少选择一个数据');
+							return;
+						}
+						delData(ids, 0);
+					});
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

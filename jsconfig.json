@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "es2015",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./static/js/*"]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "vendor",
+        "runtime",
+        "thinkphp"
+    ]
+}

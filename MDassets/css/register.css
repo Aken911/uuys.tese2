@@ -1,0 +1,198 @@
+#register .register-wrap {
+	height: 706px;
+	background: url(../img/register_banner.png) no-repeat 50%/cover
+}
+
+#register .register-wrap .register-div {
+	position: absolute;
+	right: 100px;
+	top: 150px;
+	width: 420px;
+	background: #1b1b1b;
+	border: 1px solid #363636;
+	padding: 35px 45px
+}
+
+#register .register-wrap .register-div .register-title {
+	font-size: 18px;
+	color: #f90;
+	margin-bottom: 15px
+}
+
+#register .register-wrap .register-div .register-desc {
+	margin-bottom: 15px;
+	color: #e4e4e4
+}
+
+#register .register-wrap .register-div .register-desc span {
+	cursor: pointer;
+	text-decoration: underline;
+	color: #f90
+}
+
+#register .register-wrap .register-div .register-content .register-label {
+	margin-top: 15px
+}
+
+#register .register-wrap .register-div .register-content .register-label span {
+	color: #e4e4e4
+}
+
+#register .register-wrap .register-div .register-content .register-label span a {
+	color: #f90;
+	text-decoration: underline
+}
+
+#register .register-wrap .register-div .register-content .form-input.emailcode {
+	position: relative
+}
+
+#register .register-wrap .register-div .register-content .form-input.emailcode input {
+	width: calc(100% - 100px)
+}
+
+#register .register-wrap .register-div .register-content .form-input.emailcode .get-email-code {
+	position: absolute;
+	right: 10px;
+	top: 16px;
+	color: red;
+	cursor: pointer
+}
+
+#register .register-wrap .register-div .register-content .register-btn {
+	margin-top: 15px
+}
+
+#register .register-wrap .register-div .register-content .register-btn .btn {
+	width: 100%;
+	height: 44px;
+	line-height: 44px;
+	font-size: 16px;
+	color: #000
+}
+
+#registerNext .register-wrap {
+	height: 706px;
+	background: url(../img/register_banner.png) no-repeat 50%/cover
+}
+
+#registerNext .register-next-wrap {
+	min-height: 600px;
+	padding-top: 150px
+}
+
+#registerNext .canClick {
+	text-decoration: underline
+}
+
+#registerNext .register_txt1 {
+	text-align: center
+}
+
+#registerNext .register_txt {
+	color: #f90;
+	font-size: 18px;
+	text-align: center
+}
+
+#registerNext .register_txt .icon-youjianfasongchenggong,
+#registerNext .register_txt .icon-zhucechenggong {
+	font-size: 80px
+}
+
+.cGreen {
+	color: #62c655 !important
+}
+
+.cRed {
+	color: red !important
+}
+
+.c0 {
+	color: #000 !important
+}
+
+.cBlue {
+	color: #00f
+}
+
+.c9 {
+	color: #f90 !important
+}
+
+@media screen and (max-width:961px) {
+	#register .register-wrap {
+		background: #0d0d0d;
+		height: auto
+	}
+
+	#register .register-wrap .container {
+		margin: 0
+	}
+
+	#register .register-wrap .register-div {
+		width: 100%;
+		position: static;
+		background: transparent;
+		border: 0;
+		padding: 0
+	}
+
+	#register .register-wrap .register-div .register-title {
+		text-align: center;
+		color: #f90;
+		margin-top: 35px
+	}
+
+	#register .register-wrap .register-div .register-content {
+		padding-bottom: 80px;
+		border-top: 1px solid #363636
+	}
+
+	#register .register-wrap .register-div .register-content .register-desc.pc-hide {
+		margin-top: 20px;
+		padding: 0 12px
+	}
+
+	#register .register-wrap .register-div .register-content .form-input {
+		margin-bottom: 0;
+		border: 0;
+		border-bottom: 1px solid #363636
+	}
+
+	#register .register-wrap .register-div .register-content .form-input.register-error {
+		border-bottom: 0
+	}
+
+	#register .register-wrap .register-div .register-content .form-input.register-error .error-div {
+		padding-left: 12px
+	}
+
+	#register .register-wrap .register-div .register-content .form-input:before {
+		color: #f90
+	}
+
+	#register .register-wrap .register-div .register-content .form-input input {
+		height: 46px !important
+	}
+
+	#register .register-wrap .register-div .register-content .register-label {
+		padding-left: 12px;
+		margin-top: 30px
+	}
+
+	#register .register-wrap .register-div .register-content .register-btn {
+		padding: 0 12px;
+		margin-top: 30px
+	}
+
+	#register .register-wrap .register-div .register-content .register-btn .btn {
+		background: transparent;
+		color: #f90
+	}
+
+	#registerNext .register-wrap .register-next-wrap {
+		padding-top: 40px;
+		min-height: 400px
+	}
+}

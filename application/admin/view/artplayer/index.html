@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{$title} - {:lang('admin/public/head/title')}</title>
+    <link rel="stylesheet" href="__STATIC__/layui/css/layui.css?v=728">
+    <link rel="stylesheet" href="__STATIC__/css/admin_style.css?v=728">
+    <script type="text/javascript" src="__STATIC__/js/jquery.js?v=728"></script>
+    <script type="text/javascript" src="__STATIC__/layui/layui.js?v=728"></script>
+
+    <script>
+        var ROOT_PATH="__ROOT__",ADMIN_PATH="{$_SERVER['SCRIPT_NAME']}", MAC_VERSION="v10";
+    </script>
+	<style>.layui-layout-admin .layui-footer {background-color: #fff;padding: 10px 0;text-align: center;box-shadow: 0 -1px 2px 0 rgba(0,0,0,.05);}</style>
+</head>
+<body>
+
+
+
+<div class="page-container">
+<div class="showpic" style="display:none;"><img class="showpic_img" width="120" height="160" referrerPolicy="no-referrer"></div>
+    <form class="layui-form layui-form-pane" action="">
+		<div class="layui-tab">
+			<div class="layui-tab-content">
+				<ul class="layui-tab-title">
+					<li class="layui-this">Artplayer</li>
+					<li class="">基本设置</li>
+					<li class="">前置广告</li>
+					<li class="">暂停广告</li>
+				</ul>
+			</div>	
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+					<blockquote class="layui-elem-quote layui-quote-nm">
+						<p>欢迎使用MaDouYM整合的苹果cmsV10 Artplayer播放器</p>
+					</blockquote>
+					<table class="layui-table">
+						<colgroup>
+							<col width="100">
+							<col width="150">
+							<col>
+						</colgroup>
+						<thead>
+							<tr>
+								<th colspan="2" scope="col">播放器简介</th>
+								<th colspan="1" scope="col">使用说明</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>名称</td>
+								<td>
+									<a href="https://madouui.com" target="_blank">Artplayer</a>
+								</td>
+								<td>1. PHP版本7.4</td>
+							</tr>
+							<tr>
+								<td>适用系统</td>
+								<td>
+									<a href="https://madouui.com" target="_blank">苹果cmsV10</a>
+								</td>
+								<td>2. 主题文件读写权限755</td>
+							</tr>
+							<tr>
+								<td>作者</td>
+								<td>
+									<a href="https://madouui.com" target="_blank">MaDouYM</a>
+								</td>
+								<td>3. 不支持IE8及以下浏览器，采用HLS流媒体播放m3u8格式视频，无需flash插件</td>
+							</tr>
+				
+							<tr>
+								<td>使用教程</td>
+								<td>
+									<a href="https://madouym.com" target="_blank">点击查看</a>
+								</td>
+								<td>4. 使用盗版源码遇到任何问题概不负责</td>
+							</tr>	
+							<tr>
+								<td>当前版本</td>
+								<td>1.0</td>
+								<td>5. 不提供免费个性化修改服务，咨询请联系管理</td>
+							</tr>
+							<tr>
+								<td>更新时间</td>
+								<td>2024-07-28</td>
+								<td>6. ※ 倡导文明模板 • 请勿非法使用 ※</td>
+							</tr>
+							<tr>
+								<td>官方网站</td>
+								<td><a target="_blank" href="https://madouUI.com">MaDouYM.COM</a></td>
+								<td style="color: red;">请务必尊重知识产权，严格保证不恶意传播产品源码、不得直接对源码进行二次转售或倒卖等。一经发现，我方有权利终止你在我方购买的所有源码的售后技术支持。</td>
+							</tr>	
+						</tbody>
+					</table>
+				</div>
+                <div class="layui-tab-item">
+					<div class="layui-form-item">
+						<label class="layui-form-label">全局广告状态</label>
+						<div class="layui-input-inline">
+							<input type="checkbox" name="artplayer[player_ads_status]" value="{$config['artplayer']['player_ads_status']}" {if condition="$config['artplayer']['player_ads_status'] eq 1"}checked{/if} lay-skin="switch" lay-filter="switchMadou" lay-text="开启|关闭">
+						</div>
+						<div class="layui-form-mid layui-word-aux">关闭后，所有广告均不显示</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">会员免广告</label>
+						<div class="layui-input-inline">
+							<input type="checkbox" name="artplayer[player_ads_vip]" value="{$config['artplayer']['player_ads_vip']}" {if condition="$config['artplayer']['player_ads_vip'] eq 1"}checked{/if} lay-skin="switch" lay-filter="switchMadou" lay-text="开启|关闭">
+						</div>
+						<div class="layui-form-mid layui-word-aux">关闭后，所有登陆的会员都要看广告</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">指定会员组</label>
+						<div class="layui-input-inline">
+							<input type="text" name="artplayer[player_ads_group]" placeholder="请输入会员组ID" value="{$config['artplayer']['player_ads_group']}" autocomplete="off" class="layui-input">
+						</div>
+						<div class="layui-form-mid layui-word-aux">
+							<font color="red">升级会员组后，需要退出重新登陆才生效！</font>指定会员组ID免广告
+						</div>
+					</div>
+					
+					<div class="layui-form-item">
+						<label class="layui-form-label">播放器logo</label>
+						<div class="layui-input-inline">
+							<input type="checkbox" name="artplayer[player_logo_status]" value="{$config['artplayer']['player_logo_status']}" {if condition="$config['artplayer']['player_logo_status'] eq 1"}checked{/if} lay-skin="switch" lay-filter="switchMadou" lay-text="开启|关闭">
+						</div>
+						<div class="layui-form-mid layui-word-aux">播放器右上角logo，建议尺寸193*55</div>
+					</div>
+					
+					<div class="layui-form-item">
+                        <label class="layui-form-label">logo地址</label>
+                        <div class="layui-input-inline w400">
+                            <input type="text" name="artplayer[player_logo_pic]" placeholder="请填写logo图片地址" value="{$config['artplayer']['player_logo_pic']}" class="layui-input upload-input">
+                        </div>
+                        <div class="layui-input-inline w100">
+                            <button type="button" class="layui-btn layui-btn-primary layui-upload" lay-data="{data:{thumb:0,thumb_class:'artplayer[player_logo_pic]'}}" id="upload12">上传图片</button>
+                        </div>
+                    </div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">logo跳转</label>
+						<div class="layui-input-inline w400">
+							<input type="text" name="artplayer[player_logo_link]" placeholder="点击LOGO后的跳转链接" value="{$config['artplayer']['player_logo_link']}" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">右键版权</label>
+						<div class="layui-input-inline">
+							<input type="checkbox" name="artplayer[player_copyr_status]" value="{$config['artplayer']['player_copyr_status']}" {if condition="$config['artplayer']['player_copyr_status'] eq 1"}checked{/if} lay-skin="switch" lay-filter="switchMadou" lay-text="开启|关闭">
+						</div>
+						<div class="layui-form-mid layui-word-aux">只支持pc端鼠标右键</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">右键内容</label>
+						<div class="layui-input-inline">
+							<input type="text" name="artplayer[player_copyr_content]" placeholder="请填写右键显示内容" value="{$config['artplayer']['player_copyr_content']}" autocomplete="off" class="layui-input">
+						</div>
+						<label class="layui-form-label">内容链接</label>
+						<div class="layui-input-inline">
+							<input type="text" name="artplayer[player_copyr_link]" placeholder="点击内容后的跳转链接" value="{$config['artplayer']['player_copyr_link']}" autocomplete="off" class="layui-input">
+						</div>
+						
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">自动播放</label>
+						<div class="layui-input-inline">
+							<input type="checkbox" name="artplayer[player_art_auto]" value="{$config['artplayer']['player_art_auto']}" {if condition="$config['artplayer']['player_art_auto'] eq 1"}checked{/if} lay-skin="switch" lay-filter="switchMadou" lay-text="开启|关闭">
+						</div>
+						<div class="layui-form-mid layui-word-aux">仅在关闭所有广告的情况下才生效，只针对PC端</div>
+					</div>
+					
+					<div class="layui-form-item">
+						<label class="layui-form-label">主题颜色</label>
+						<div class="layui-input-inline">
+							<input type="text" name="artplayer[player_theme_color]" placeholder="请输入会员组ID" value="{$config['artplayer']['player_theme_color']}" autocomplete="off" class="layui-input">
+						</div>
+						<div class="layui-form-mid layui-word-aux">播放器主题颜色</div>
+					</div>
+					
+                </div>
+
+                <div class="layui-tab-item">
+					<div class="layui-form-item">
+						<label class="layui-form-label">前置广告状态</label>
+						<div class="layui-input-inline">
+							<input type="checkbox" name="artplayer[pre_ads_status]" value="{$config['artplayer']['pre_ads_status']}" {if condition="$config['artplayer']['pre_ads_status'] eq 1"}checked{/if} lay-skin="switch" lay-filter="switchMadou" lay-text="开启|关闭">
+						</div>
+						<div class="layui-form-mid layui-word-aux">关闭则不显示前置广告</div>
+					</div>
+					<div class="layui-form-item">
+                        <label class="layui-form-label">前置广告类型</label>
+							<div class="layui-input-block">
+							<div class="layui-input-inline w400">
+								<input type="radio" name="artplayer[pre_ads_mode]" value="0" title="图片" {if condition="$config['artplayer']['pre_ads_mode'] eq 0"}checked {/if}>
+								<input type="radio" name="artplayer[pre_ads_mode]" value="1" title="视频" {if condition="$config['artplayer']['pre_ads_mode'] eq 1"}checked {/if}>
+							</div>
+                        </div>
+                    </div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">广告显示时间</label>
+						<div class="layui-input-inline">
+							<input name="artplayer[pre_ads_time]" type="text" value="{$config['artplayer']['pre_ads_time']}" class="layui-input" placeholder="单位（秒）">	
+						</div>
+						<div class="layui-form-mid layui-word-aux">单位（秒）</div>
+					</div>
+
+					<div class="layui-form-item">
+						<label class="layui-form-label">跳过按钮</label>
+						<div class="layui-input-inline">
+							<input type="checkbox" name="artplayer[pre_ads_button]" value="{$config['artplayer']['pre_ads_button']}" {if condition="$config['artplayer']['pre_ads_button'] eq 1"}checked{/if} lay-skin="switch" lay-filter="switchMadou" lay-text="开启|关闭">
+						</div>
+						<div class="layui-form-mid layui-word-aux">只支持图片类型前置广告跳过，视频广告在手机端无法跳过</div>
+					</div>
+					
+					
+					<div class="layui-form-item">
+                        <label class="layui-form-label">跳过限制</label>
+							<div class="layui-input-block">
+							<div class="layui-input-inline w400">
+								<input type="radio" name="artplayer[pre_ads_auth]" value="0" title="不限制" {if condition="$config['artplayer']['pre_ads_auth'] eq 0"}checked {/if}>
+								<input type="radio" name="artplayer[pre_ads_auth]" value="1" title="注册会员" {if condition="$config['artplayer']['pre_ads_auth'] eq 1"}checked {/if}>
+								<input type="radio" name="artplayer[pre_ads_auth]" value="2" title="指定会员组" {if condition="$config['artplayer']['pre_ads_auth'] eq 2"}checked {/if}>
+								
+							</div>
+                        </div>
+                    </div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">指定会员组</label>
+						<div class="layui-input-inline">
+							<input type="text" name="artplayer[pre_ads_group]" placeholder="请输入指定会员组ID" value="{$config['artplayer']['pre_ads_group']}" autocomplete="off" class="layui-input">
+						</div>
+						<div class="layui-form-mid layui-word-aux">不限制：游客也可以跳过；注册会员：注册登陆就可以跳过；指定会员组：需要指定的会员组才能跳过</div>
+					</div>
+				
+					<div class="layui-form-item">
+                        <label class="layui-form-label">图片广告内容</label>
+                        <div class="layui-input-inline w400">
+                            <input type="text" name="artplayer[pre_pic_img]" placeholder="请输入http链接" value="{$config['artplayer']['pre_pic_img']}" class="layui-input upload-input">
+                        </div>
+                        <div class="layui-input-inline w100">
+                            <button type="button" class="layui-btn layui-btn-primary layui-upload" lay-data="{data:{thumb:0,thumb_class:'artplayer[pre_pic_img]'}}" id="upload13">上传图片</button>
+                        </div>
+						<div class="layui-form-mid layui-word-aux">建议大小840*470</div>
+                    </div>
+				
+					<div class="layui-form-item">
+						<label class="layui-form-label">图片广告链接</label>
+						<div class="layui-input-inline w400">
+							<input type="text" name="artplayer[pre_pic_link]" placeholder="请输入http跳转链接" value="{$config['artplayer']['pre_pic_link']}" class="layui-input">
+						</div>
+						<div class="layui-form-mid layui-word-aux">点击图片后跳转到哪个地方</div>
+					</div>
+
+					
+					<div class="layui-form-item">
+						<label class="layui-form-label">视频广告内容</label>
+						<div class="layui-input-inline w400">
+							<input type="text" name="artplayer[pre_vod_url]" placeholder="只支持mp4格式视频" autocomplete="off" value="{$config['artplayer']['pre_vod_url']}" class="layui-input">	
+						</div>
+						<div class="layui-form-mid layui-word-aux">链接必须带http，只支持mp4格式视频，手机端广告视频有多少秒就播放多少秒，不能跳过</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">视频广告链接</label>
+						<div class="layui-input-inline w400">
+							<input type="text" name="artplayer[pre_vod_link]" placeholder="http跳转链接" autocomplete="off" value="{$config['artplayer']['pre_vod_link']}" class="layui-input">		
+						</div>
+						<div class="layui-form-mid layui-word-aux">链接必须带http，点击视频广告跳转的地址</div>
+					</div>
+					
+                </div>
+
+                <div class="layui-tab-item">
+                    
+					<div class="layui-form-item">
+						<label class="layui-form-label">暂停广告状态</label>
+						<div class="layui-input-inline">
+							<input type="checkbox" name="artplayer[pause_status]" value="{$config['artplayer']['pause_status']}" {if condition="$config['artplayer']['pause_status'] eq 1"}checked{/if} lay-skin="switch" lay-filter="switchMadou" lay-text="开启|关闭">
+						</div>
+						<div class="layui-form-mid layui-word-aux">关闭则不显示暂停广告</div>
+					</div>
+					<div class="layui-form-item">
+                        <label class="layui-form-label">暂停广告图片</label>
+                        <div class="layui-input-inline w400">
+                            <input type="text" name="artplayer[pause_pic]" placeholder="请输入http链接" value="{$config['artplayer']['pause_pic']}" class="layui-input upload-input">
+                        </div>
+                        <div class="layui-input-inline w100">
+                            <button type="button" class="layui-btn layui-btn-primary layui-upload" lay-data="{data:{thumb:0,thumb_class:'artplayer[pause_pic]'}}" id="upload14">上传图片</button>
+                        </div>
+						<div class="layui-form-mid layui-word-aux">建议大小840*470</div>
+                    </div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">暂停广告链接</label>
+						<div class="layui-input-inline w400">
+							<input type="text" name="artplayer[pause_link]" placeholder="请输入http链接" value="{$config['artplayer']['pause_link']}" autocomplete="off" class="layui-input">
+						</div>
+						<div class="layui-form-mid layui-word-aux">点击图片后跳转到哪个地方</div>
+					</div>
+				</div>
+
+            </div>
+        
+			<div class="layui-form-item layui-layout-admin" style="margin: 30px 0;">
+				<div class="layui-input-block">
+					<div class="layui-footer" style="left:0;height:38px;">
+						<button type="button" class="layui-btn" lay-submit="" lay-filter="formSubmit">保 存</button>
+						<button class="layui-btn layui-btn-warm" type="reset">还 原</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+    </form>
+</div>
+{include file="../../../application/admin/view/public/foot" /}
+
+<script type="text/javascript">
+    layui.use(['form','upload', 'layer','table'], function(){
+        // 操作对象
+        var form = layui.form
+            , layer = layui.layer
+            , table = layui.table
+            , upload = layui.upload;
+			
+       
+		
+		var upload_path = $('.j-ajax', parent.document).attr('href').replace('/index/clear.html', '') + '/upload/upload.html?flag=artplayer';
+		var ishttps = 'https:' == document.location.protocol ? 'https://': 'http://';
+			upload.render({
+				elem: '.layui-upload'
+				,url: upload_path
+				,method: 'post'
+				,before: function(input) {
+					layer.msg('文件上传中...', {time:3000000});
+				},done: function(res, index, upload) {
+					var obj = this.item;
+					if (res.code == 0) {
+						layer.msg(res.msg);
+						return false;
+					}
+					layer.closeAll();
+					var input = $(obj).parent().parent().find('.upload-input');
+					if ($(obj).attr('lay-type') == 'image') {
+						input.siblings('img').attr('src', res.data.file).show();
+					}
+					input.val('/'+res.data.file);
+				}
+			});
+		form.on('switch(switchMadou)', function(data){
+			if(this.checked){
+				$(this).attr("value","1");
+			}else{
+				$(this).attr("value","0");
+			}
+		});
+		form.on('switch(switchAuto)', function(data){
+			if(this.checked){
+				$(this).attr("value","true");
+			}else{
+				$(this).attr("value","false");
+			}
+		});
+        $('.upload-input').hover(function (e){
+            var e = window.event || e;
+            var imgsrc = $(this).val();
+            if(imgsrc.trim()==""){ return; }
+            var left = e.clientX+document.body.scrollLeft+20;
+            var top = e.clientY+document.body.scrollTop+20;
+            $(".showpic").css({left:left,top:top,display:""});
+            if(imgsrc.indexOf('://')<0){ imgsrc = ROOT_PATH + '/' + imgsrc;	} else{ imgsrc = imgsrc.replace('mac:','http:'); }
+            $(".showpic_img").attr("src", imgsrc);
+        },function (e){
+            $(".showpic").css("display","none");
+        });
+
+    });
+</script>
+
+</body>
+</html>

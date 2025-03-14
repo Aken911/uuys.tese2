@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="MaDouYm">
+		<title>{$obj.actor_name}个人资料_{$obj.actor_name}演过的电视剧_{$obj.actor_name}电影全集-{$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.actor_name}个人资料,{$obj.actor_name}演过的电视剧,{$obj.actor_name}电影全集,{$obj.actor_name}最新电影,{$obj.actor_name}最新电视剧">
+		<meta name="description" content="{$maccms.site_name}演示站为你收集了{$obj.actor_name}个人资料包括了{$obj.actor_name}最新演过的电视剧,{$obj.actor_name}电影全集,以及{$obj.actor_name}图片剧照最近动态等信息希望你能喜欢。">
+		{include file="system/include"}
+		<link href="{$maccms.path}MDassets/css/actor.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div id="star_info" class="page">
+			<div class="page-content">
+				{include file="system/header"}
+				{include file="module/left_login"}
+				{include file="module/left"}
+				{include file="module/headerad"}
+				<div class="container">
+					<div class="star-info">
+						<div class="star-info-image">
+							<img class="madou-lazy" src="{$maccms.path}MDassets/img/loading.png" data-src="{:mac_url_img($obj.actor_pic)}" onerror="javascript:this.src='{$maccms.path}MDassets/img/loading.png'">
+						</div>
+						<div class="star-info-desc">
+							<div class="main-title pl3">{$obj.actor_name}</div>
+							<div class="star-info-desc-txt">（拼音：{$obj.actor_en}，{$obj.actor_birthday}）
+								性别：{$obj.actor_sex}，
+								别名： {$obj.actor_alias|mac_default='未知'}，
+								星座：{$obj.actor_starsign}，
+								生日：{$obj.actor_birthday}，
+								出生地：{$obj.actor_birtharea}，
+								地区：{$obj.actor_area}，
+								首字母：{$obj.actor_letter}，
+								血型 {$obj.actor_blood}型，
+								身高／体重 {$obj.actor_height} 厘米 / {$obj.actor_weight} 千克，
+								{$obj.actor_blurb}...
+							</div>
+							<div class="main-title pl3">演员介绍</div>
+							<div class="star-info-desc-txt">{$obj.actor_content}</div>
+							<div id="opens" class="pc-hide open"><span>展开</span></div>
+							
+						</div>
+					</div>
+					<div class="star-videos clearfix m-hide">
+						<div class="main-title">主要作品</div>
+						<div class="video-item-row clearfix">
+							{maccms:vod num="100000" actor="'.$obj['actor_name'].'" order="desc" by="time"}
+							{include file="module/vodlist"}
+							{/maccms:vod}
+						</div>
+					</div>
+					<div class="pc-hide star-videos-ablum">
+						<div class="star-videos-ablum-title"><span class="videos-ablum-title-item active">视频</span><span class="videos-ablum-title-item m-hide">相册</span></div>
+						<div class="star-videos-ablum-content">
+							<div class="videos-list">
+								<div class="video-item-row clearfix">
+								{maccms:vod num="100000" actor="'.$obj['actor_name'].'" order="desc" by="time"}
+								{include file="module/vodlist"}
+								{/maccms:vod}
+								</div>
+							</div>
+							<div class="ablum-list"></div>
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

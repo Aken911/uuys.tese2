@@ -1,0 +1,215 @@
+.banner1 {
+	height: 150px
+}
+
+.recommend .recommend-list {
+	position: relative
+}
+
+.recommend .recommend-list .recommend-list-items {
+	width: 60%;
+	display: inline-block;
+	vertical-align: top
+}
+
+.recommend .recommend-list .recommend-list-immediately {
+	width: 40%;
+	right: 0;
+	top: 0;
+	padding-left: 6px;
+	float: right
+}
+
+.recommend .recommend-list .show-more {
+	display: none
+}
+
+.foot-immediately .foot-immediately-item {
+	width: 697px;
+	height: 165px;
+	display: inline-block
+}
+
+.foot-immediately .foot-immediately-item:nth-child(0) {
+	margin-right: 6px
+}
+
+.foot-immediately2 .foot-immediately-item {
+	width: 464px;
+	height: 188px;
+	display: inline-block
+}
+
+.foot-immediately2 .foot-immediately-item:nth-child(0) {
+	margin-right: 6px
+}
+
+.floatFooter {
+	display: none
+}
+
+.cGreen {
+	color: #62c655 !important
+}
+
+.cRed {
+	color: red !important
+}
+
+.c0 {
+	color: #000 !important
+}
+
+.cBlue {
+	color: #00f
+}
+
+.c9 {
+	color: #f90 !important
+}
+
+@media screen and (max-width:961px) {
+	.container {
+		margin: 0
+	}
+
+	.first .main-title.recommend-title {
+		margin-top: 15px
+	}
+
+	.main-title {
+		margin: 15px .2rem 20px
+	}
+
+	.main-title.recommend-title {
+		margin: 30px 0 15px;
+		background: #282828;
+		height: 50px;
+		line-height: 50px;
+		padding: 0 .2rem
+	}
+
+	.recommend .recommend-list {
+		position: relative
+	}
+
+	.recommend .recommend-list .immediately-item {
+		margin-bottom: 25px
+	}
+
+	.recommend .recommend-list .video-item-row {
+		margin: 0 .2rem
+	}
+
+	.recommend .recommend-list .video-item-row .video-item-col {
+		padding: 0
+	}
+
+	.recommend .recommend-list .recommend-list-items {
+		width: 60%;
+		display: inline-block;
+		vertical-align: top
+	}
+
+	.recommend .recommend-list .recommend-list-immediately {
+		width: 40%;
+		right: 0;
+		top: 0;
+		padding-left: 6px;
+		float: right
+	}
+
+	.recommend .recommend-list .show-more {
+		width: 4.2rem;
+		height: .8rem;
+		line-height: .8rem;
+		background: -webkit-gradient(linear, left top, left bottom, from(#f90), to(#f90));
+		border-radius: 5px;
+		color: #000;
+		text-align: center;
+		display: block;
+		margin: 0 auto .5rem auto;
+		font-size: .3rem
+	}
+
+	.header-menu {
+		display: -webkit-box !important;
+		display: -ms-flexbox !important;
+		display: flex !important;
+		-webkit-flex-wrap: wrap !important;
+		-webkit-box-lines: multiple !important;
+		-ms-flex-wrap: wrap !important;
+		flex-wrap: wrap !important;
+		-webkit-box-pack: start;
+		-ms-flex-pack: start;
+		justify-content: flex-start
+	}
+
+	.header-menu .header-menu-item {
+		-moz-flex-grow: 1;
+		-webkit-box-flex: 1;
+		-ms-flex-positive: 1;
+		flex-grow: 1;
+		text-align: center;
+		padding: 10px 0;
+		font-size: 14px;
+		font-weight: 700
+	}
+
+	.floatFooter {
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		height: 40px;
+		display: block;
+		text-align: center;
+		line-height: 40px;
+		z-index: 999;
+		background: rgba(0, 0, 0, .8)
+	}
+
+	.floatFooter .floatFooter-txt {
+		text-decoration: underline;
+		font-weight: 700;
+		font-size: .33rem;
+		color: #ff2116;
+		-webkit-animation: flash .4s infinite;
+		animation: flash .4s infinite
+	}
+
+	.floatFooter .icon-guanbi {
+		font-size: 14px;
+		position: absolute;
+		right: 10px;
+		color: #949494;
+		font-weight: 700
+	}
+}
+
+@-webkit-keyframes flash {
+	0% {
+		color: #ff0
+	}
+
+	50% {
+		color: red
+	}
+
+	to {
+		color: #ff0
+	}
+}
+
+@keyframes flash {
+	0% {
+		color: #ff0
+	}
+
+	50% {
+		color: red
+	}
+
+	to {
+		color: #ff0
+	}
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="MaDouYm">
+		<title>联系我们 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link href="{$maccms.path}MDassets/css/help.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div id="help" class="page">
+			<div class="page-content">
+				{include file="system/header"}
+				{include file="module/left_login"}
+				{include file="module/left"}
+				<div class="container">
+					<div class="clearfix help-page">
+						<div class="contact child-view">
+							<div class="cooperation-content">
+								<div class="main-title">联系我们</div>
+								<div class="help-txt-div">
+									<p class="help-txt">您有任何疑问、意见都可以通过下述方式随时与我们联系，我们期待为您服务。</p>
+									<p class="help-txt">客服邮箱：<span class="go-home-a">{$maccms.site_email}</span></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="module/popup"}
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

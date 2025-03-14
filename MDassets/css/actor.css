@@ -1,0 +1,343 @@
+#star .no-data {
+	margin-bottom: 150px
+}
+
+#star .sub-header-menu.container .category-wrap.cup .cup-txt {
+	height: 34px;
+	line-height: 34px;
+	display: inline-block
+}
+
+#star .sub-header-menu.container .category-wrap.cup .cup-div {
+	display: inline-block
+}
+
+#star .star-wrap {
+	min-height: 600px
+}
+
+#star .star-wrap .video-item-row {
+	margin-left: -20px;
+	margin-right: -20px
+}
+
+#star .star-wrap .video-item-row .video-item-col {
+	padding-left: 20px;
+	padding-right: 20px
+}
+
+#star .star-wrap .video-item-row .video-item-col .placeholder-component {
+	height: 320px
+}
+
+#star .star-wrap .video-item-row .video-item-col .placeholder-component img {
+	width: 100%;
+	height: auto
+}
+
+#star .star-wrap .star-item .star-image a img {
+	width: 100%;
+	height: 320px;
+	-o-object-fit: cover;
+	object-fit: cover
+}
+
+#star .star-wrap .star-item .star-desc {
+	margin-top: 10px
+}
+
+#star .star-wrap .star-item .star-desc .star-desc-title {
+	color: #f90;
+	font-size: 16px;
+	margin-bottom: 10px;
+	font-weight: 700;
+	font-family: Helvetica
+}
+
+#star .star-wrap .star-item .star-desc .star-desc-info .star-desc-info-icon {
+	display: inline-block
+}
+
+#star .star-wrap .star-item .star-desc .star-desc-info .star-desc-info-icon.right {
+	margin-top: -2px
+}
+
+#star .star-wrap .star-item .star-desc .star-desc-info .star-desc-info-icon i {
+	margin-right: 5px
+}
+
+#star_info .show-more {
+	width: 150px;
+	background: #282828;
+	height: 35px;
+	line-height: 35px;
+	margin: 20px auto;
+	text-align: center
+}
+
+#star_info .no-data {
+	margin-bottom: 50px
+}
+
+#star_info .no-data .no-data-img {
+	margin-top: 50px
+}
+
+#star_info .star-info {
+	margin-top: 50px;
+	height: 340px
+}
+
+#star_info .star-info .star-info-image {
+	float: left;
+	position: relative;
+	cursor: pointer
+}
+
+#star_info .star-info .star-info-image img {
+	width: 260px;
+	height: 340px
+}
+
+#star_info .star-info .star-info-image .star-info-photo {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	background: -webkit-gradient(linear, left bottom, left top, from(#000), to(transparent));
+	background: linear-gradient(0deg, #000, transparent);
+	color: #f90
+}
+
+#star_info .star-info .star-info-desc {
+	margin-left: 300px
+}
+
+#star_info .star-info .star-info-desc .star-info-desc-txt {
+	line-height: 24px;
+	word-break: break-all
+}
+
+#star_info .star-videos {
+	margin-bottom: 60px
+}
+
+#star_info .star-images {
+	height: 340px;
+	margin-top: 30px;
+	overflow: hidden
+}
+
+#star_info .star-images .row {
+	margin-left: -12px;
+	margin-right: -12px
+}
+
+.cGreen {
+	color: #62c655 !important
+}
+
+.cRed {
+	color: red !important
+}
+
+.c0 {
+	color: #000 !important
+}
+
+.cBlue {
+	color: #00f
+}
+
+.c9 {
+	color: #f90 !important
+}
+
+@media screen and (max-width:961px) {
+	.category-wrap .category-item {
+		display: inline-block;
+		vertical-align: middle;
+		padding: 10px 0;
+		width: 70px;
+		text-align: center;
+		border-bottom: 1px solid #363636;
+		margin-left: 0px;
+		cursor: pointer
+	}
+
+	#star .banner.container {
+		margin-top: 1rem
+	}
+
+	#star .sub-header-menu.container {
+		margin: 0;
+		padding-left: .3rem;
+		border-bottom: 1px solid #363636;
+		height: inherit
+	}
+
+	#star .sub-header-menu.container .category-wrap {
+		font-weight: 700
+	}
+
+	#star .sub-header-menu.container .category-wrap .category-item,
+	#star .sub-header-menu.container .category-wrap .category-item.active {
+		border: 0
+	}
+
+	#star .sub-header-menu.container .category-wrap.cup {
+		width: 100%;
+		overflow: auto
+	}
+
+	#star .sub-header-menu.container .category-wrap.cup .cup-txt {
+		height: .6rem;
+		line-height: .67rem;
+		position: absolute;
+		background: #0d0d0d;
+		padding-left: .3rem;
+		left: 0
+	}
+
+	#star .sub-header-menu.container .category-wrap.cup .cup-div {
+		display: inline-block;
+		width: 750px;
+		margin-left: .7rem
+	}
+
+	#star .star-wrap {
+		padding-top: 10px;
+		margin: 0 .2rem;
+		min-height: 0
+	}
+
+	#star .star-wrap .video-item-row {
+		margin: 0
+	}
+
+	#star .star-wrap .video-item-row .video-item-col.col-5 {
+		width: 50%
+	}
+
+	#star .star-wrap .video-item-row .video-item-col.col-5:nth-child(2n-1) {
+		padding-left: 0;
+		padding-right: 5px
+	}
+
+	#star .star-wrap .video-item-row .video-item-col.col-5:nth-child(2n) {
+		padding-left: 5px;
+		padding-right: 0
+	}
+
+	#star .star-wrap .video-item-row .video-item-col.col-5 .star-item {
+		width: 100%
+	}
+
+	#star .star-wrap .video-item-row .video-item-col.col-5 .star-item .star-image img {
+		height: 264px
+	}
+
+	#star .star-wrap .video-item-row .video-item-col.col-5 .star-item .star-desc .star-desc-title {
+		font-size: 14px
+	}
+
+	#star .star-wrap .video-item-row .video-item-col.col-5 .star-item a {
+		margin: auto
+	}
+
+	#star_info .container {
+		margin: 0
+	}
+
+	#star_info .star-info {
+		margin: 0;
+		padding-top: 10px;
+		height: auto
+	}
+
+	#star_info .star-info .star-info-image {
+		float: none;
+		background: #000
+	}
+
+	#star_info .star-info .star-info-image img {
+		width: 100%;
+		-o-object-fit: contain;
+		object-fit: contain;
+		height: 230px
+	}
+
+	#star_info .star-info .star-info-desc {
+		margin: 0;
+		height: 110px;
+		padding-bottom: 30px;
+		overflow: hidden;
+		position: relative
+	}
+
+	#star_info .star-info .star-info-desc.isOpen {
+		height: auto
+	}
+
+	#star_info .star-info .star-info-desc .star-info-desc-txt {
+		padding: 0 .3rem
+	}
+
+	#star_info .star-info .star-info-desc .main-title {
+		margin-bottom: 5px;
+		font-size: 16px
+	}
+
+	#star_info .star-info .star-info-desc .open {
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+		text-align: center;
+		background: #0d0d0d;
+		z-index: 1
+	}
+
+	#star_info .star-info .star-info-desc .open span {
+		display: inline-block;
+		margin: auto;
+		background: #363636;
+		padding: 8px 12px
+	}
+
+	#star_info .star-info .star-info-desc .open:after {
+		content: "";
+		width: 100%;
+		height: 0;
+		border-bottom: 1px dashed #363636;
+		top: 15px;
+		display: block;
+		position: absolute
+	}
+
+	#star_info .star-videos-ablum {
+		margin: 0 .3rem
+	}
+
+	#star_info .star-videos-ablum .star-videos-ablum-title {
+		border-bottom: 1px solid #363636
+	}
+
+	#star_info .star-videos-ablum .star-videos-ablum-title .videos-ablum-title-item {
+		display: inline-block;
+		width: 80px;
+		padding: 10px;
+		font-size: 16px;
+		text-align: center
+	}
+
+	#star_info .star-videos-ablum .star-videos-ablum-title .videos-ablum-title-item.active {
+		color: #f90;
+		border-bottom: 1px solid #f90
+	}
+
+	#star_info .star-videos-ablum .star-videos-ablum-content {
+		padding-top: .3rem
+	}
+}

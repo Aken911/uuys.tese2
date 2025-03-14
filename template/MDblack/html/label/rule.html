@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="MaDouYm">
+		<title>会员权益 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<style>
+			#assignment .banner,
+			#user_rule .banner {
+				height: 180px;
+				background: url({$maccms.path}MDassets/img/usercenter_banner.jpg) no-repeat 50%/cover;
+				margin-bottom: 30px
+			}
+		</style>
+	</head>
+	<body>
+		<div id="user_rule" class="page">
+			<div class="page-content">
+				{include file="system/header"}
+				{include file="module/left_login"}
+				{include file="module/left"}
+				<div class="container">
+					<div class="banner"></div>
+					<div class="rule-content">
+						<div class="user-rule-box">
+							<div class="main-title">会员制度</div>
+							<div class="user-rule-content">
+								<table>
+									<tr>
+										<th class="t_left">会员等级</th>
+										<th>权益</th>
+										<th>升级条件</th>
+									</tr>
+									<tr>
+										<td class="t_left">游客</td>
+										<td>·视频观看限制时间</td>
+										<td>注册、登录</td>
+									</tr>
+									<tr>
+										<td class="t_left">默认会员</td>
+										<td>
+											<div>·视频观看限制时间</div>
+											<div>·开放评论</div>
+										</td>
+										
+										<td>分享推广</td>
+									</tr>
+									<tr>
+										<td class="t_left">VIP</td>
+										<td>
+											<div>·无限观影，免片头广告</div>
+											<div>·vip专享影片</div>
+											<div>·开放评论</div>
+										</td>
+										<td>分享推广</td>
+									</tr>
+								</table>
+								<a href="{:mac_url('user/share')}" class="btn btn-empty">
+									立即邀请
+								</a>
+								<div class="tip">
+									注：本站部分资源正在紧张的开发中，VIP权益将逐步开放，尊敬的用户您想一步升级为VIP用户吗？还在等什么？赶快分享吧！如果您想通过微信分享用户，可以将您的微信号发至邮箱{$maccms.site_email}
+									我们会安排工作人员与您联系。
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="module/popup"}
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

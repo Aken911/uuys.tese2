@@ -1,0 +1,25 @@
+<!--登录弹窗开始-->
+<div class="mac_report reply_box">
+    <form class="gbook_form">
+        <input type="hidden" name="gbook_rid" value="{$param.id}">
+        <p class="msg_cue">问题描述（选填）：</p>
+        <textarea class="gbook_content" name="gbook_content" style="height:150px">{$param.name}</textarea>
+        <div class="msg_code">
+            {if condition="$gbook.verify eq 1"}
+            验证码：<input type="text" name="verify" class="mac_verify" maxlength="4" style="width:80px;lin-height:20px;">
+            {/if}
+        </div>
+        <div style="text-align: right;padding: 20px 0px;">
+            <input type="button" class="gbook_submit submit_btn" style="height: 30px;line-height: 29px; padding: 0 20px;background: transparent; color: #f90; border: 1px solid #f90;" value="提交">
+        </div>
+
+    </form>
+</div>
+<!--登录弹窗结束-->
+<script>
+    $(function(){
+        MAC.Gbook.Login = {$gbook.login};
+        MAC.Gbook.Verify = {$gbook.verify};
+        MAC.Gbook.Init();
+    });
+</script>

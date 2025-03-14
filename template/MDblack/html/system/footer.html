@@ -1,0 +1,67 @@
+{include file="module/tips"}
+{include file="module/footerad"}
+<div class="footer">
+	<div class="footer-menu">
+		<div class="container">
+			<p class="m-hide">{$maccms.site_name}每天都会更新及添加更多的资源，本网站中的所有资源都是<span class="high">100%免费观看的</span>，本网站致力于提供更好的免费观看体验，如有疑问，请向我们发送反馈意见，联系邮箱
+				<span class="high">{$maccms.site_email}</span></p>
+			<p class="m-hide">免责声明：若本站收录的资源侵犯了您的权益，请发邮件至：<span class="high">{$maccms.site_email}</span>，我们会及时删除侵权内容，谢谢合作！</p>
+			<div class="footer-link">
+				<div class="footer-link-item"><a href="{:mac_url('label/rule')}">会员权益</a></div>
+				<div class="footer-link-item"><a href="{:mac_url('label/cooperation')}">广告合作</a></div>
+				<div class="footer-link-item"><a href="{:mac_url('label/contactus')}">联系我们</a></div>
+				<div class="footer-link-item"><a href="{:mac_url('label/go_home')}">如何回家</a></div>
+			</div>
+			<p class="pc-hide footer-tip">{$maccms.site_name}每天都会更新及添加更多的资源，本网站中的所有资源都是<span class="high">100%免费观看的</span>，本网站致力于提供更好的免费观看体验，如有疑问，请向我们发送反馈意见，联系邮箱<span  class="high">{$maccms.site_email}</span></p>
+		</div>
+	</div>
+	<div class="center copyright">版权所有 ©{$maccms.site_url} 2021</div>
+</div>
+<div id="gototop" title="回到顶部" style="position: fixed; bottom: 200px; right: 30px; cursor: pointer;z-index:2001;">
+	<img src="/MDassets/img/gototop.png">
+</div>
+<div style="display: none;">
+	{$maccms.site_tj}
+</div>
+<script src="{$maccms.path}MDassets/js/layer.js"></script>
+<script src="{$maccms.path}MDassets/js/jquery.lazyload.js"></script>
+<script>
+    function vip() {
+		$("#vips").show();
+	}
+</script>
+<script>
+	$("img.madou-lazy,.madou-lazy").lazyload({
+		effect: "fadeIn",
+		threshold: 200,
+		failurelimit: 20,
+	});	
+	function vod(id){
+		var user_id ="{$user.user_id}";
+		$.get("{:mac_url('user/ajax_ulog')}?ac=set&mid=1&id=" + id + "&type=2", function(data) {
+			if(data.msg=="获取成功"){
+				layer.msg("已收藏,无需重复收藏！");
+			}else if(data.msg=="保存成功!"){
+				layer.msg("收藏成功");
+			}else if(user_id=="0"){
+				layer.msg('请先登录');
+			}
+		},"json");
+	}
+	function art(id) {
+		var user_id ="{$user.user_id}";
+		$.get("{:mac_url('user/ajax_ulog')}?ac=set&mid=2&id=" + id + "&type=2", function(data) {
+			if(data.msg=="获取成功"){
+				layer.msg("已收藏,无需重复收藏！");
+			}else if(data.msg=="保存成功!"){
+				layer.msg("收藏成功");
+			}else if(user_id=="0"){
+				layer.msg('请先登录');
+			}
+		}, "json");
+	}
+	
+</script>
+<div class="sidenav-overlay"></div>
+<div class="drag-target"></div>
+

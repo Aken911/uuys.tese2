@@ -1,0 +1,27 @@
+<div id="vips" class="not-video-count-modal-wrap notice-modal only-vip-modal v--modal-overlay" style="display: none;">
+	    <div class="v--modal-background-click" style="margin-top: 20vh;">
+		<div class="v--modal-top-right"></div>
+		<div class="v--modal-box v--modal" style="left: 262px; width: 500px; height: 200px;">
+			<div class="video-count-modal notice-modal-content">
+				<div class="title">提示<i class="iconfont icon-guanbi"></i></div>
+				<div class="video-count-contant1">
+					<div class="video-count-contant-txt">
+						{if condition="$GLOBALS['user']['group_id'] eq 1"}
+						尊敬的用户，请登录/注册进行观影！
+						{elseif condition="$GLOBALS['user']['group_id'] eq 2"}
+						尊敬的用户，您的VIP等级未达到观影要求，请分享好友，提升VIP等级！
+						{/if}
+					</div>
+					<div class="buttons">
+						{if condition="$GLOBALS['user']['group_id'] eq 1"}
+						<a href="{:mac_url('user/reg')}" class="btn btn-empty">注册</a>
+						<div id="login_btn" class="btn">登录</div>
+						{elseif condition="$GLOBALS['user']['group_id'] eq 2"}
+						<a href="{:mac_url('user/share')}" class="btn">立即分享</a>
+						{/if}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

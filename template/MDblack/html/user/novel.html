@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="MaDouYm">
+		<title>小说收藏 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link href="{$maccms.path}MDassets/css/user.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div id="usercenter" class="page">
+			<div class="page-content">
+				{include file="system/header"}
+				{include file="module/left_login"}
+				{include file="module/left"}
+				<div class="container">
+					{include file="user/menu"}
+					<div class="clearfix usercenter-page">
+						<div class="my-novel child-view">
+							<div class="pc-hide main-title">
+							<span>我的小说</span>
+							<span id="edit" class="right">编辑</span>
+							<span id="success" class="right" style="display: none;">取消</span>
+							</div>
+							<div class="novel-wrap">
+							{if condition="$__PAGING__.record_total gt 0"}
+								<div class="novel-list m-hide" style="">
+									<table>
+										<thead>
+											<tr>
+												<th>书名/最新章节</th>
+												<th>分类</th>
+												<th>作者</th>
+											</tr>
+										</thead>
+										<tbody>
+											{volist name="list" id="vo"}
+											{if condition="$vo.ulog_mid eq 2"}
+											{maccms:art order="desc" by="time" ids="'.$vo['ulog_rid'].'" type="'.($GLOBALS['config']['site']['site_book_id']).'" id="vo1" key="key1"}
+											<tr>
+												<td>
+													<label class="checkbox-label">
+														<input type="checkbox" class="filled-in choose-item" name="ids[]" id="checkbox" value="{$vo.ulog_id}">
+														<span></span>
+													</label>
+													<a href="{$vo.data.link}" class="high cursor novel-name">《{$vo1.art_name}》</a>
+												</td>
+												<td>{$vo1.type.type_name}</td>
+												<td>{$vo1.art_author|mac_default='佚名'}</td>
+												<td></td>
+											</tr>
+											{/maccms:art}
+											{/if}
+											{/volist}
+										</tbody>
+									</table>
+									<div class="table-footer">
+										<label onClick="MAC.CheckBox.All('ids[]');" class="checkbox-label cursor"><input type="checkbox" class="filled-in"><span></span>全部</label>
+										<span id="btnDel" class="table-oper-item">移除</span>
+									</div>
+								</div>
+								<div class="mobile-novel-list pc-hide">
+									{volist name="list" id="vo"}
+									{if condition="$vo.ulog_mid eq 2"}
+									{maccms:art order="desc" by="time" ids="'.$vo['ulog_rid'].'" type="'.($GLOBALS['config']['site']['site_book_id']).'" id="vo1" key="key1"}
+									<a href="{$vo.data.link}" class="mobile-novel-item">
+										<div class="novel-item-oper">
+											<label class="checkbox-label">
+											<input name="ids[]" type="checkbox" class="filled-in mobile-choose-item" value="{$vo.ulog_id}">
+												<span></span>
+											</label>
+										</div>
+										<div class="mobile-novel-item-content">
+											<img class="mobile-novel-item-img" src="{$maccms.path}MDassets/img/loading.png" data-src="{:mac_url_img($vo1.art_pic)}">
+											<div class="mobile-novel-item-desc">
+												<div class="mobile-novel-item-title">《{$vo1.art_name}》</div>
+												<div class="mobile-novel-item-txt">分类: {$vo1.type.type_name}</div>
+												<div class="mobile-novel-item-txt">作者: {$vo1.art_author|mac_default='佚名'}</div>
+												<div class="mobile-novel-item-txt">{$vo1.art_hits}观看<span><i class="iconfont cGreen icon-zan1"></i>{if empty($vo1.art_up+$vo1.art_down)}100{else/}{:round($vo1.art_up*100/($vo1.art_up+$vo1.art_down))}{/if}%</span></div>
+											</div>
+										</div>
+									</a>
+									{/maccms:art}
+									{/if}
+									{/volist}
+								</div>
+								{else/}
+								<div class="no-data">
+									<div class="no-data-img"></div>
+									<div class="no-data-txt">没有收藏。。。</div>
+								</div>
+								{/if}
+								{include file="system/paging"}
+							</div>
+							<div class="oper-div" style="display: none;">
+								<div onClick="MAC.CheckBox.All('ids[]');" class="oper-div-item">全选</div>
+								<div id="mbtnDel" class="oper-div-item">删除</div>
+							</div> 
+						</div>
+					</div>
+
+				</div>
+				{include file="system/footer"}
+				<script>
+				function delData(ids,all){
+					var msg ='删除';
+					if(all==1){
+						msg='清空';
+					}
+					if(confirm('确定要'+msg+'记录吗')){
+						$.post("{:url('user/ulog_del')}",{ids:ids,type:2,all:all},function(data) {
+							if (data.code == '1') {
+								layer.msg('删除成功');
+								location.reload();
+							}else {
+								layer.msg('删除失败：' + data.msg);
+							}
+						}, 'json')
+					}
+				}
+				$("#btnClear").click(function(){
+					delData('',1);
+				});
+				$("#btnDel,#mbtnDel").click(function(){
+					var ids = MAC.CheckBox.Ids('ids[]');
+					if(ids==''){
+						layer.msg("请至少选择一个数据");
+						return;
+					}
+					delData(ids,0);
+				});
+			</script>
+				<script type="text/javascript">
+					$(document).ready(function() {
+						$("#edit").click(function() {
+							$("#edit").hide();
+							$("#success").show();
+							$(".mobile-novel-item-content").addClass("showOper");
+							$(".oper-div").show();
+						});
+						$("#success").click(function() {
+							$("#success").hide();
+							$("#edit").show();
+							$(".mobile-novel-item-content").removeClass("showOper");
+							$(".oper-div").hide();
+						});
+
+					});
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

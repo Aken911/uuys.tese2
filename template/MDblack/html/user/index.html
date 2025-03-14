@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="MaDouYm">
+		<title>会员中心 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link href="{$maccms.path}MDassets/css/user.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div id="usercenter" class="page">
+			<div class="page-content">
+				{include file="system/header"}
+				{include file="module/left_login"}
+				{include file="module/left"}
+				<div class="container">
+					{include file="user/menu"}
+					<div class="clearfix usercenter-page">
+						<div class="assignment usercenter-box child-view">
+							<div class="assignment-main task">
+								<div class="pc-hide rel">
+									<div class="icon-u"><i class="iconfont icon-yonghuming"></i></div>
+									<div class="assignment-main-content row center">
+										<div class="col col-2">
+											<span class="count" id="user_day"></span>
+										</div>
+										<div class="col col-2">
+											<div class="vip-grade">{$count}</div>
+										</div>
+										<div class="col col-2"><span id="user_time">剩余天数</span></div>
+										<div class="col col-2">
+											<div>邀请人数</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="task">
+								<div class="main-title">邀请任务</div>
+								<div class="task-desc">
+									说明：邀请的好友填写您的邀请码完成注册，您的邀请人数相应增加
+								</div>
+								<div class="task-item">
+									<div class="task-title">默认会员</div>
+									<div class="task-content">
+										<ul>
+											<li class="desc">累计邀请 <span class="high">{$GLOBALS['config']['site']['site_invitenum_0']}</span> 人可获得</li>
+											<li>赠送VIP天数 <span class="high">+{$GLOBALS['config']['site']['site_invitetime_0']}</span></li>
+											<li>开放 <span class="high">评论</span></li>
+										</ul>
+										<a href="{:url('user/share')}" class="btn btn-empty assignment-right">立即前往</a>
+									</div>
+								</div>
+								<div class="task-item">
+									<div class="task-title">VIP会员</div>
+									<div class="task-content">
+										<ul>
+											<li class="desc">累计邀请 <span class="high">{$GLOBALS['config']['site']['site_invitenum_0']}</span> 人可获得</li>
+											<li>赠送VIP天数 <span class="high">+{$GLOBALS['config']['site']['site_invitetime_0']}</span></li>
+											<br/>
+											<li class="desc">累计邀请 <span class="high">{$GLOBALS['config']['site']['site_invitenum_1']}</span> 人可获得</li>
+											<li>赠送VIP天数 <span class="high">+{$GLOBALS['config']['site']['site_invitetime_1']}</span></li>
+											<br/>
+											<li class="desc">累计邀请 <span class="high">{$GLOBALS['config']['site']['site_invitenum_2']}</span> 人可获得</li>
+											<li>赠送VIP天数 <span class="high">+{$GLOBALS['config']['site']['site_invitetime_2']}</span></li>
+											<br/>
+											<li class="desc">累计邀请 <span class="high">{$GLOBALS['config']['site']['site_invitenum_3']}</span> 人可获得</li>
+											<li>赠送VIP天数 <span class="high">+{$GLOBALS['config']['site']['site_invitetime_3']}</span></li>
+											<br/>
+											<li>观影 <span class="high">无限制</span></li>
+											<li>解锁专享 <span class="high">高速线路</span></li>
+											<li><span class="high">免片头广告</span></li>
+											<li>开放 <span class="high">评论</span></li>
+										</ul>
+										<a href="{:url('user/share')}" class="btn btn-empty assignment-right">立即前往</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<script>
+                    function show() {
+						//获取目的日期
+						var myyear = {$obj.user_end_time|date='Y',###}; //年
+						var mymonth = {$obj.user_end_time|date='m',###} - 1; //月
+                        var myday = {$obj.user_end_time|date='d',###}; //天
+                        var myhour = {$obj.user_end_time|date='H',###};; //时
+                        var time = Number(new Date(myyear, mymonth, myday, myhour));
+                        //获取当前时间
+                        var nowTime = Date.now();
+                        //获取时间差
+                        var timediff = Math.round((time - nowTime) / 1000);
+                        //获取还剩多少天
+                        var day = parseInt(timediff / 3600 / 24);
+                        //获取还剩多少小时
+                        var hour = parseInt(timediff / 3600 % 24);
+                        //输出还剩多少时间
+                        if (day==0) {
+                            document.getElementById("user_day").innerHTML = hour;
+                            document.getElementById("user_time").innerHTML = "剩余小时";
+                        } else{
+                            document.getElementById("user_day").innerHTML = day;
+                            document.getElementById("user_time").innerHTML = "剩余天数";
+                        }
+                        setTimeout(show, 1000);
+                        if (timediff < 0) {
+                            document.getElementById("user_day").innerHTML = 0;
+                        }
+                    }
+                    show();
+				</script>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

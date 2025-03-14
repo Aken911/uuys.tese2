@@ -1,0 +1,62 @@
+<ul id="slide-out" class="sidenav slide-out">
+	<li>
+		<div class="logo-div">
+			<i id="left_close" class="iconfont icon-caidan- high"></i>
+			<a href="{$maccms.path}"> <div class="logo"></div></a>
+		</div>
+	</li>
+	<li>
+		{if condition="$GLOBALS['user']['user_id']" gt 0}
+		<div class="login-div">
+			<a href="{:mac_url('user/index')}" class="btn btn-empty">任务</a>
+			<a href="{:mac_url('user/share')}" class="btn">邀请</a>
+		</div>
+		{else}
+		<div class="login-div">
+			<span id="login_btn" class="btn btn-empty">登录</span>
+			<a href="{:mac_url('user/reg')}" class="btn">注册</a>
+		</div>
+		{/if}
+	</li>
+	{if condition="$GLOBALS['user']['user_id']" gt 0}
+	<li class="menu-item">
+		<a id="user" class="waves-effect">
+			<div class="menu-item-div">
+				<div class="menu-item-div-wrap"><i class="icon-yonghuming iconfont icon-menu"></i>{$user.user_name}&nbsp;{if condition="$GLOBALS['user']['group_id'] eq 3"}<i class="vip-icon vip2"></i>{else}<i class="vip-icon vip1"></i>{/if}<i class="iconfont icon-jiantou right"></i></div>
+			</div>
+		</a>
+		<ul id="user_list" class="sub-menu sub-menu-3">
+			<li><a href="{:mac_url('user/index')}">我的任务</a></li>
+			<li><a href="{:mac_url('user/favs')}">我的视频</a></li>
+			<li><a href="{:mac_url('user/picture')}">我的图片</a></li>
+			<li><a href="{:mac_url('user/novel')}">我的小说</a></li>
+			<li><a href="{:mac_url('user/center')}">个人中心</a></li>
+		</ul>
+	</li>
+	{/if}
+	<li class="menu-item {if condition=" $maccms.aid eq 1"}active{/if}">
+		<a href="/" class="waves-effect">
+			<div class="menu-item-div">
+				<div class="menu-item-div-wrap"><i class="icon-shouye iconfont icon-menu"></i>首页</div>
+			</div>
+		</a>
+	</li>
+	{maccms:type ids="parent" order="asc" by="sort"}
+	<li class="menu-item {if condition=" ($vo.type_id eq $GLOBALS['type_id'] || $vo.type_id eq $GLOBALS['type_pid'])"}active{/if}">
+		<a href="{:mac_url_type($vo)}" class="waves-effect">
+			<div class="menu-item-div">
+				<div class="menu-item-div-wrap"><i class="icon-{$vo.type_logo} iconfont icon-menu"></i>{$vo.type_name}</div>
+			</div>
+		</a>
+	</li>
+	{/maccms:type}
+	{if condition="$GLOBALS['user']['user_id']" gt 0}
+	<li class="menu-item">
+		<a href="{:mac_url('user/logout')}" class="waves-effect">
+			<div class="menu-item-div">
+				<div class="menu-item-div-wrap"><i class="icon-login iconfont icon-menu"></i>退出</div>
+			</div>
+		</a>
+	</li>
+	{/if}
+</ul>

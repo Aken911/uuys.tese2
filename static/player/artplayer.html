@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-language" content="zh-CN">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta name="referrer" content="never"/>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>ArtPlayer</title>
+    <style>
+	html, body {
+		height: 100%;
+		margin: 0;
+	}
+	.artplayer-app {
+		width: 100%;
+		height: 100%;
+	}
+	.loader {
+		position: fixed;
+		margin: auto;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		z-index: 9999999998 !important;
+	}
+	
+
+	.loader img ,.prevideo{
+		width: 100%;
+		height: 100%;
+		-o-object-fit: fill;
+		object-fit: fill;
+	}
+	.plugin  {
+		display: flex;
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		z-index: 9999999999 !important;
+	}
+	.plugin>div {
+		cursor: pointer;
+		font-size: 16px;
+		color: #fff;
+		background-color: #00000080;
+		border-radius: 15px;
+		align-items: center;
+		margin-left: 5px;
+		padding: 5px 10px;
+		display: flex;
+	}
+	.artplayer-logo {
+		position: absolute;
+		right: 20px;
+		top: 20px;
+		width: 15%;
+		z-index: 9999;
+	}
+	#player_pause img {
+		width: 100%;
+		height: 100%;
+	}
+	.pause_close {
+		position: absolute;
+		right: 10px;
+		top: 10px;
+		width: 30px;
+		height: 30px;
+		border-radius: 50px;
+		line-height: 30px;
+		text-align: center;
+		font-size: 18px;
+		color: #fff;
+		font-weight: 700;
+		cursor: pointer;
+		pointer-events: auto;
+		background-color: #00000080;
+	}
+	.pause_close:hover {
+	    color: #0d9bff; 
+	}
+    </style>
+	<script src="/static/js/jquery.js"></script>
+    <script src="/static/player/artplayer/artplayer.js"></script>
+    <script src="/static/player/artplayer/hls.js"></script>
+	<script src="/static/player/artplayer/layer.js"></script>
+</head>
+<body>
+    <div class="artplayer-app"></div>
+    <script>
+		if (parent.MacPlayer.PreAdsMode == 1) {
+			var load_html = '<div class="loader" id="loader"><div class="plugin"><div class="skip">跳过</div><div class="num" id="num">999秒</div></div><a id="loader_link" href="' + parent.MacPlayer.PreVodLink +'" target="_blank"><video class="prevideo" autoplay muted playsinline loop><source src="' + parent.MacPlayer.PreVodUrl + '" type="video/mp4" /></video></a></div>';
+		}else{
+			var load_html = '<div class="loader" id="loader"><div class="plugin"><div class="skip">跳过</div><div class="num" id="num">999秒</div></div><a id="loader_link" href="' + parent.MacPlayer.PrePicLink +'" target="_blank"><img  src="' + parent.MacPlayer.PrePicImg + '" alt="loading"> </a></div>';
+		}
+		
+		if (parent.MacPlayer.PreAdsStatus == 1 && parent.MacPlayer.AdsStatus == 1) {
+			$("body").append(load_html);
+			$("body").css("overflow","hidden");
+			var num = Number(parent.MacPlayer.PreAdsTime);
+			
+			
+			var load_time = setInterval(function() {
+				num--;
+				document.getElementById("num").innerHTML = "倒计时  "+num+"  秒";
+				if (num == 0) {
+					clearInterval(load_time);
+					$('#loader').remove();
+					artplay()
+				}
+			}, 1000)
+			
+			if (parent.MacPlayer.PreAdsButton != 1) {
+				$('.skip').remove();
+			}
+			$('.skip').click(function(event) {
+				event.preventDefault();
+			
+				if (parent.MacPlayer.PreAdsAuth == 0) {
+					clearInterval(load_time);
+					$('#loader').remove();
+					artplay()
+				} else if (parent.MacPlayer.PreAdsAuth == 1) {
+					if (parent.MacPlayer.GroupId >= 2) {
+						clearInterval(load_time);
+						$('#loader').remove();
+						artplay()
+					}else{
+						layer.msg("注册会员才可跳过广告");
+					}
+				
+				} else if (parent.MacPlayer.PreAdsAuth == 2) {
+					if (parent.MacPlayer.GroupId >= parent.MacPlayer.PreAdsGroup) {
+						clearInterval(load_time);
+						$('#loader').remove();
+						artplay()
+					}else{
+						layer.msg("VIP会员才可跳过广告");
+					}
+				}
+			})
+		}else{
+			artplay()
+		};
+
+
+    	function artplay() {
+    
+    		function getCustomType(url) {
+                const ext = url.split('.').pop().toLowerCase();
+                if (ext === 'm3u8') {
+                    return 'm3u8';
+                } else if (ext === 'mp4') {
+                    return 'mp4';
+                }
+                return '';
+            }
+    
+            var videoUrl = parent.MacPlayer.PlayUrl;
+    		if (parent.MacPlayer.ArtAuto == 1) {
+    			var artauto = true;
+    		}else{
+    			var artauto = false;
+    		}
+            var art = new Artplayer({
+                container: '.artplayer-app', // 播放器挂载的 DOM 容器
+                url: videoUrl, // 视频源地址
+                poster: parent.MacPlayer.Poster, // 视频的海报
+                volume: 0.8, // 播放器的默认音量
+                isLive: false, // 使用直播模式，会隐藏进度条和播放时间
+                muted: false, // 是否默认静音
+                autoplay: artauto, // 是否自动播放
+                pip: true, // 是否在底部控制栏里显示 画中画 的开关按钮
+                autoSize: false, // 播放器的尺寸默认会填充整个 container 容器尺寸
+                autoMini: true, // 当播放器滚动到浏览器视口以外时，自动进入 迷你播放 模式
+                screenshot: true, // 是否在底部控制栏里显示 视频截图 功能
+                setting: true, // 是否在底部控制栏里显示 设置面板 的开关按钮
+                loop: true, // 是否循环播放
+                flip: true, // 是否显示视频翻转功能
+                playbackRate: true, // 是否显示视频播放速度功能
+                aspectRatio: true, // 是否显示视频长宽比功能
+                fullscreen: true, // 是否在底部控制栏里显示播放器 窗口全屏 按钮
+                fullscreenWeb: false, // 是否在底部控制栏里显示播放器 网页全屏 按钮
+                miniProgressBar: true, // 迷你进度条
+                mutex: true, // 假如页面里同时存在多个播放器，是否只能让一个播放器播放
+                backdrop: true,
+                playsInline: true, // 在移动端是否使用 playsInline 模式
+                autoPlayback: true, // 是否使用自动 回放功能
+                airplay: true, // 是否显示 airplay 按钮
+                theme: parent.MacPlayer.ThemeColor, // 播放器主题颜色
+                lang: navigator.language.toLowerCase(), // 默认显示语言
+                moreVideoAttr: { // 更多视频属性
+                    crossOrigin: 'anonymous',
+                },
+                icons: {
+                    loading: '<img src="/static/player/artplayer/ploading.gif">',
+                    state: '<img width="150" heigth="150" src="/static/player/artplayer/state.svg">',
+                    indicator: '<img width="16" heigth="16" src="/static/player/artplayer/indicator.svg">',
+                },
+                customType: {
+                    m3u8: function (video, url) {
+                        if (Hls.isSupported()) {
+                            const hls = new Hls();
+                            hls.loadSource(url);
+                            hls.attachMedia(video);
+                        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                            video.src = url;
+                        }
+                    },
+                    mp4: function (video, url) {
+                        video.src = url;
+                    },
+                },
+                type: getCustomType(videoUrl),
+            });
+    
+            art.on('artplayerPluginAds:click', (ads) => {
+                console.info('广告被点击', ads);
+            });
+    
+            art.on('artplayerPluginAds:skip', (ads) => {
+                console.info('广告被跳过', ads);
+            });
+    		
+    
+    			
+    		if (parent.MacPlayer.PauseStatus == 1 && parent.MacPlayer.AdsStatus == 1) {
+    			if (parent.MacPlayer.AdsVip == 1) {
+        			if (parent.MacPlayer.GroupId < parent.MacPlayer.AdsGroup) {
+        				art.on('pause', function() {
+        					console.log('暂停了');
+        					madou_pause()
+        				});
+        				art.on('play', function() {
+        					console.log('播放中');
+        					madou_remove()
+        				});
+        			}
+    			}else{
+    				art.on('pause', function() {
+    					console.log('暂停了');
+    					madou_pause()
+    				});
+    				art.on('play', function() {
+    					console.log('播放中');
+    					madou_remove()
+    				});
+    			}	
+    		}
+    		function madou_remove() {
+    			$('#player_pause').remove();
+    		}
+    		function madou_pause() {
+    			$('.art-video-player').append('<div id="player_pause" style="position:absolute;z-index:209910539;top:50%;left:50%;border-radius:5px;-webkit-transform:translate(-50%,-50%);-moz-transform:translate(-50%,-50%);transform:translate(-50%,-50%);max-width:80%;max-height:80%;"><div class="pause_close">✕</div><a href="' + parent.MacPlayer.PauseLink + '" target="_blank"><img src="' + parent.MacPlayer.PausePic + '" /></a></div>');
+    
+    			$('.pause_close').click(function() {
+    				$('#player_pause').remove();
+    			});
+    		}
+    		if (parent.MacPlayer.LogoStatus == 1) {
+    			$('.art-video-player').append('<div class="artplayer-logo"><a href="' + parent.MacPlayer.LogoLink + '" target="_blank"><img alt="logo" src="' + parent.MacPlayer.LogoPic + '"><a></div>');
+    		}
+    		if (parent.MacPlayer.CopyrStatus == 1) {
+    			$('.art-contextmenu-playbackRate').before('<a href="' + parent.MacPlayer.CopyrLink + '" target="_blank" style="border-bottom: 1px solid #ffffff1a;"><div class="art-contextmenu art-contextmenu-contextmenu">' + parent.MacPlayer.CopyrContent + '</div></a>');
+    		}
+    	}	
+    </script>
+</body>
+</html>

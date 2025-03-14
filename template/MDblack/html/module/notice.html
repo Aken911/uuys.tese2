@@ -1,0 +1,15 @@
+{if condition="$GLOBALS['config']['site']['site_notice_status'] eq 1"}
+<div id="notice" class="container notice">
+	<div class="scores-marquee flex-row">
+		<div class="marquee-all">
+			<div class="marquee flex-row">
+				<div class="line">
+					{maccms:website num="200" order="desc" type="'.($GLOBALS['config']['site']['site_notice_id']).'" by="time"}
+					<div>{$vo.website_blurb}</div>
+					{/maccms:website}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/if}

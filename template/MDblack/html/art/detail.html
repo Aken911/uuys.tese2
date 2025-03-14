@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="TK8">
+		<title>{$obj.art_name} - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.art_name}">
+		<meta name="description" content="{$obj.art_name}">
+		{include file="system/include"}
+		<link href="{$maccms.path}MDassets/css/picture.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div id="view_picture" class="page">
+			<div class="page-content">
+				{include file="system/header"}
+				{include file="module/left_login"}
+				{include file="module/left"}
+				<div class="container">
+					<div class="view_picture-wrap">
+					<i class="iconfont icon-arrows-copy-copy iconfont-button m-hide"></i>
+					<i class="iconfont icon-jiantou iconfont-button m-hide"></i>
+						<div class="picture-div">
+							<div class="main-title m-hide">{$obj.art_name}({$__PAGING__.page_current}/{$__PAGING__.page_total})</div>
+							<div class="picture-info row">
+							<a href="{$__PAGING__.page_url|mac_url_page=$__PAGING__.page_prev}">
+								<i class="iconfont icon-arrows-copy-copy iconfont-button"></i>
+							</a>
+							<a href="{$__PAGING__.page_url|mac_url_page=$__PAGING__.page_next}">
+								<i class="iconfont icon-jiantou iconfont-button"></i>
+							</a>
+								<div class="picture-image col s9">
+									{$obj.art_page_list[$param['page']]['content']|mac_url_content_img}
+									<div class="picture-desc m-hide">
+										<span class="play-count"><span class="high"><span class="mac_hits hits" data-mid="{$maccms.mid}" data-id="{$obj.art_id}" data-type="hits"></span></span> 观看次数</span>
+										<div class="collect">
+										<span onclick="MAC.Gbook.Report('编号【{$obj.art_id}】名称【{$obj.art_name}】不能浏览请检查修复，页面地址' + location.href,'{$obj.art_id}')"><i class="iconfont icon-jubao"></i>反馈</span>
+										<span onclick="art({$obj.art_id})"><i class="iconfont icon-asmkticon0242"></i>收藏</span>
+										<a target="_blank" href="{$obj['art_page_list'][$param['page']]['note']}"><i class="iconfont icon-fangdajing"></i>查看大图</a></div>
+									</div>
+								</div>
+								<div class="picture-content col s3 m-hide">
+									<div class="picture-evaluate">
+										<div class="evaluate">
+											<div class="evaluate-txt">喜欢</div>
+											<div class="evaluate-txt1">{if empty($obj.art_up+$obj.art_down)}100{else/}{:round($obj.art_up*100/($obj.art_up+$obj.art_down))}{/if}%</div>
+											<div class="evaluate-progress">
+												<span style="width:{if empty($obj.art_up+$obj.art_down)}100{else/}{:round($obj.art_up*100/($obj.art_up+$obj.art_down))}{/if}%;"></span>
+											</div>
+											<div class="picture-evaluate-icon">
+												<span class="digg_link" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-mid="{$maccms.mid}" data-type="up"><i class="iconfont icon-zan1"></i>{$obj.art_up}</span>
+												<span class="digg_link" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-mid="{$maccms.mid}" data-type="down"><i class="iconfont icon-buzan"></i>{$obj.art_down}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="pc-hide">
+								<div class="row ">
+									<div class="col s4 digg_link" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-mid="{$maccms.mid}" data-type="up"><i class="iconfont icon-zan1"></i><a class="digg_num">{$obj.art_up}</a></div>
+									<div class="col s4 digg_link" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-mid="{$maccms.mid}" data-type="down"><i class="iconfont icon-buzan"></i><a class="digg_num">{$obj.art_down}</a></div>
+									<div class="col s4" onclick="art({$obj.art_id})"><i class="iconfont icon-asmkticon0242"></i>收藏</div>
+								</div>
+								<div class="m-picture-desc">
+									<p>{$obj.art_name}({$__PAGING__.page_current}/{$__PAGING__.page_total})</p>
+									<div class="picture-evaluate-icon">
+										<span><a class="mac_hits hits" data-mid="{$maccms.mid}" data-id="{$obj.art_id}" data-type="hits"></a>观看</span>
+										<span><i class="iconfont icon-zan1 cGreen"></i>{if empty($obj.art_up+$obj.art_down)}100{else/}{:round($obj.art_up*100/($obj.art_up+$obj.art_down))}{/if}%</span>
+										<span onclick="MAC.Gbook.Report('编号【{$obj.art_id}】名称【{$obj.art_name}】不能浏览请检查修复，页面地址' + location.href,'{$obj.art_id}')"><i class="iconfont icon-jubao"></i>反馈</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="mac_comment" data-id="{$obj.art_id}" data-mid="{$maccms.mid}"></div>
+					<script>
+						$(function(){
+							MAC.Comment.Login = {$comment.login};
+							MAC.Comment.Verify = {$comment.verify};
+							MAC.Comment.Init();
+							MAC.Comment.Show(1);
+						});
+					</script>
+				</div>
+				{include file="system/footer"}
+				<span style="display:none" class="mac_ulog_set" alt="设置内容页浏览记录" data-type="1" data-mid="{$maccms.mid}" data-id="{$obj.art_id}" data-sid="" data-nid=""></span>
+				<span style="display:none" class="mac_history_set" alt="设置History历史记录" data-name="[{$obj.type.type_name}]{$obj.art_name}" data-pic="{$obj.art_pic|mac_url_img}"></span>
+			</div>
+		</div>
+	</body>
+</html>

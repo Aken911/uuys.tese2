@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="MaDouYm">
+		<title>{$maccms.site_name}-明星库</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link href="{$maccms.path}MDassets/css/actor.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div id="star" class="page">
+			<div class="page-content has-sub-header">
+				{include file="system/header"}
+				{include file="module/left_login"}
+				{include file="module/left"}
+				{include file="module/headerad"}
+				<div class="container title-container">
+					<div class="main-title m-hide"><span>演员</span></div>
+					<div class="container sub-header-menu fixed">
+						<div class="category-wrap cup">
+							<div class="cup-txt">地区:</div>
+							<div class="cup-div">
+								<a href="{:mac_url('actor/show',['sex'=>$param['sex'],'blood'=>$param['blood'],'starsign'=>$param['starsign'],'letter'=>$param['letter'],'id'=>$obj['type_id']])}" class="category-item {if condition="$param['area'] ==''"}active{/if}">全部</a>
+								{maccms:foreach name=":explode(',','大陆,香港,日本,美国')" id="vo2" key="key2"}
+								<a href="{:mac_url('actor/show',['area'=>$vo2,'sex'=>$param['sex'],'blood'=>$param['blood'],'starsign'=>$param['starsign'],'letter'=>$param['letter'],'id'=>$obj['type_id']])}" class="category-item {if condition="$param['area'] eq $vo2"}active{/if}">{$vo2}</a>
+								{/maccms:foreach}
+								
+							</div>
+						</div>
+						<div class="category-wrap cup">
+							<div class="cup-txt">字母:</div>
+							<div class="cup-div">
+								<a href="{:mac_url('actor/show',['area'=>$param['area'],'sex'=>$param['sex'],'blood'=>$param['blood'],'starsign'=>$param['starsign'],'id'=>$obj['type_id']])}" class="category-item {if condition="$param['letter'] ==''"}active{/if}">全部</a>
+								{maccms:foreach name=":explode(',','A,B,C,D,E,F,G,H')" id="vo2" key="key2"}
+								<a href="{:mac_url('actor/show',['area'=>$param['area'],'sex'=>$param['sex'],'blood'=>$param['blood'],'starsign'=>$param['starsign'],'id'=>$obj['type_id'],'letter'=>$vo2])}" class="category-item {if condition="$param['letter'] eq $vo2"}active{/if}">{$vo2}</a>
+								{/maccms:foreach}
+								
+							</div>
+						</div>
+					</div>
+					<div class="star-wrap">
+						<div class="video-item-row clearfix">
+							{maccms:actor num="20" paging="yes" pageurl="actor/show" order="desc" by="time"}
+							<div class="video-item-col col-5">
+								<div class="star-item">
+									<div class="star-image">
+										<a href="{$vo|mac_url_actor_detail}">
+											<img class="madou-lazy" src="{$maccms.path}MDassets/img/loading.png" data-src="{:mac_url_img($vo.actor_pic)}" onerror="javascript:this.src='{$maccms.path}MDassets/img/loading.png'">
+										</a>
+									</div>
+									<div class="star-desc">
+										<div class="star-desc-title">{$vo.actor_name}</div>
+										<div class="star-desc-info">
+											<span class="star-desc-info-icon">{$vo.actor_hits}观看</span>
+											<span class="star-desc-info-icon right"><i class="iconfont icon-zan1 cGreen"></i>{$vo.actor_up}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							{/maccms:actor}
+						</div>
+						{include file="system/paging"}
+					</div>
+				</div>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

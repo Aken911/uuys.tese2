@@ -1,0 +1,34 @@
+<div class="usercenter-header">
+						<div class="usercenter-info">
+							<div class="usercenter-username">
+								<div class="usercenter-txt">
+									<span class="username">{$user.user_name}</span>{if condition="$GLOBALS['user']['group_id'] eq 3"}<i class="vip-icon vip2"></i>{else}<i class="vip-icon vip1"></i>{/if}
+								</div>
+								{if condition="$GLOBALS['user']['group_id'] eq 3"}
+								<div class="usercenter-txt">会员期限: {$user.user_end_time|mac_day}</div>
+								{else}
+								<div class="usercenter-txt">注册时间: {$obj.user_reg_time|mac_day}</div>
+								{/if}
+							</div>
+						</div>
+						<div class="usercenter-menu">
+							<a href="{:url('user/index')}">
+								<div class="usercenter-menu-item {if strpos($_SERVER["REQUEST_URI"],'user/index')}active{/if}">任务</div>
+							</a>
+							<a href="{:url('user/favs')}" class="router-link-exact-active router-link-active">
+								<div class="usercenter-menu-item {if strpos($_SERVER["REQUEST_URI"],'favs')}active{/if}">视频</div>
+							</a>
+							<a href="{:url('user/picture')}">
+								<div class="usercenter-menu-item {if strpos($_SERVER["REQUEST_URI"],'picture')}active{/if}">图片</div>
+							</a>
+							<a href="{:url('user/novel')}">
+								<div class="usercenter-menu-item {if strpos($_SERVER["REQUEST_URI"],'novel')}active{/if}">小说</div>
+							</a>
+							<a href="{:url('user/center')}">
+								<div class="usercenter-menu-item {if strpos($_SERVER["REQUEST_URI"],'center')}active{/if}">个人中心</div>
+							</a>
+							<a href="{:url('user/share')}">
+								<div class="usercenter-menu-item {if strpos($_SERVER["REQUEST_URI"],'share')}active{/if}">好友分享</div>
+							</a>
+						</div>
+					</div>

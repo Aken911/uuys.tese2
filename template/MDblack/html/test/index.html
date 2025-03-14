@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全局工具函数测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #444;
+            margin-top: 20px;
+        }
+        .test-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+        }
+        .test-item h3 {
+            margin-top: 0;
+            color: #4CAF50;
+        }
+        .test-item p {
+            margin: 10px 0;
+        }
+        .test-item .label {
+            font-weight: bold;
+            display: inline-block;
+            width: 120px;
+        }
+        .test-item .value {
+            display: inline-block;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>全局工具函数测试</h1>
+        
+        <div class="test-item">
+            <h3>格式化日期时间</h3>
+            <p><span class="label">当前时间：</span><span class="value">{$currentDateTime}</span></p>
+        </div>
+        
+        <div class="test-item">
+            <h3>生成随机字符串</h3>
+            <p><span class="label">随机字符串：</span><span class="value">{$randomStr}</span></p>
+        </div>
+        
+        <div class="test-item">
+            <h3>获取客户端IP</h3>
+            <p><span class="label">客户端IP：</span><span class="value">{$clientIp}</span></p>
+        </div>
+        
+        <div class="test-item">
+            <h3>过滤HTML标签</h3>
+            <p><span class="label">原始HTML：</span><span class="value">{$originalHtml}</span></p>
+            <p><span class="label">过滤后HTML：</span><span class="value">{$filteredHtml}</span></p>
+        </div>
+        
+        <div class="test-item">
+            <h3>截取字符串</h3>
+            <p><span class="label">原始文本：</span><span class="value">{$longText}</span></p>
+            <p><span class="label">截取后文本：</span><span class="value">{$shortText}</span></p>
+        </div>
+        
+        <div class="test-item">
+            <h3>格式化文件大小</h3>
+            <p><span class="label">原始大小：</span><span class="value">{$fileSize} 字节</span></p>
+            <p><span class="label">格式化后大小：</span><span class="value">{$formattedSize}</span></p>
+        </div>
+        
+        <div class="test-item">
+            <h3>检查是否为移动设备</h3>
+            <p><span class="label">是否为移动设备：</span><span class="value">{$isMobile}</span></p>
+        </div>
+        
+        <div class="test-item">
+            <h3>更多测试</h3>
+            <p>点击下面的按钮查看更多示例：</p>
+            <a href="{:url('test/runExamples')}" class="btn">运行所有示例</a>
+        </div>
+        
+        <div class="footer">
+            <p>苹果CMS 全局工具函数测试 &copy; {$Think.now|date="Y"}</p>
+        </div>
+    </div>
+</body>
+</html> 

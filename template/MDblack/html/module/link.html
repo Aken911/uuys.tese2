@@ -1,0 +1,10 @@
+<div class="footer-site-link">
+	<div class="container">
+		<p>友站链接</p>
+		<div class="link">
+		    {maccms:link num="1000" order="desc" by="sort" type="all"}
+			<div class="footer-site-link-item"><a href="{$vo.link_url}" target="_blank">{$vo.link_name}</a><span>|</span></div>
+			{/maccms:link}
+		</div>
+	</div>
+</div>

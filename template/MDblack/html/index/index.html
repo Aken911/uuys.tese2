@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="MaDouYm">
+		<title>{$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link href="{$maccms.path}MDassets/css/home.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div id="home" class="page">
+			<div class="has-sub-header page-content">
+				{include file="system/header"}
+				<div class="pc-hide header-menu sub-header-menu">
+					{maccms:type ids="parent" order="asc" by="sort"}
+					<a href="{:mac_url_type($vo)}" class="header-menu-item">{$vo.type_name}</a>
+					{/maccms:type}
+					<a href="{$GLOBALS['config']['site']['site_app_down']}" class="header-menu-item">本站APP</a>
+				</div>
+				{include file="module/left_login"}
+				{include file="module/left"}
+				<div class="page-content">
+					{include file="module/headerad"}
+					{include file="module/banner"}
+					{include file="module/notice"}
+					<div class="container first">
+						<div class="main-title recommend-title">
+							<a href="{:mac_url_search(['wd'=>$param['wd'],'area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'hits' ],'vod')}" class="main-title-name">最热推荐</a>
+							<div class="right more">
+								<a href="{:mac_url_search(['wd'=>$param['wd'],'area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'hits' ],'vod')}">更多视频<i class="iconfont icon-gengduo"></i></a>
+							</div>
+						</div>
+						<div>
+							<div class="recommend clearfix">
+								<div class="recommend-list">
+									<div class="video-item-row">
+										{maccms:vod num="10" by="hits" order="desc"}
+										{include file="module/vodlist"}
+										{/maccms:vod}
+									</div>
+									<a href="{:mac_url_search(['wd'=>$param['wd'],'area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'hits' ],'vod')}" class="show-more clearfix">查看更多</a>
+								</div>
+							</div>
+						</div>
+					</div>
+			
+					<div class="container">
+						<div class="main-title recommend-title">
+							<a href="{:mac_url_search(['wd'=>$param['wd'],'area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'time' ],'vod')}" class="main-title-name">最新推荐</a>
+							<div class="right more">
+								<a href="{:mac_url_search(['wd'=>$param['wd'],'area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'time' ],'vod')}">更多视频<i class="iconfont icon-gengduo"></i></a>
+							</div>
+						</div>
+						<div>
+							<div class="recommend clearfix">
+								<div class="recommend-list">
+									<div class="video-item-row">
+										{maccms:vod num="10" by="time" order="desc"}
+										{include file="module/vodlist"}
+										{/maccms:vod}
+									</div>
+									<a href="{:mac_url_search(['wd'=>$param['wd'],'area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'time' ],'vod')}" class="show-more clearfix">查看更多</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="container">
+						<div class="main-title recommend-title">
+							<a href="{:mac_url_search(['wd'=>$param['wd'],'area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'score' ],'vod')}" class="main-title-name">为您推荐</a>
+							<div class="right more">
+								<a href="{:mac_url_search(['wd'=>$param['wd'],'area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'score' ],'vod')}">更多视频<i class="iconfont icon-gengduo"></i></a>
+							</div>
+						</div>
+						<div>
+							<div class="recommend clearfix">
+								<div class="recommend-list">
+									<div class="video-item-row">
+										{maccms:vod num="10" by="rnd" order="desc"}
+										{include file="module/vodlist"}
+										{/maccms:vod}
+									</div>
+						
+									<a href="{:mac_url_search(['wd'=>$param['wd'],'area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'score' ],'vod')}" class="show-more clearfix">查看更多</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="module/popup"}
+				{include file="module/link"}
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

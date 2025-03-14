@@ -1,0 +1,31 @@
+<div class="layui-tab-item">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+        <legend>易支付设置</legend>
+    </fieldset>
+    <div class="layui-form-item">
+        <label class="layui-form-label">支付接口：</label>
+        <div class="layui-input-inline w400">
+            <input type="text" name="pay[yipay][apiurl]" placeholder="" value="{$config['pay']['yipay']['apiurl']}" class="layui-input">
+        </div>
+		<div class="layui-form-mid layui-word-aux">如: https://yipay.com/submit.php</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">支付商家编号：</label>
+        <div class="layui-input-inline w400">
+            <input type="text" name="pay[yipay][appid]" placeholder="" value="{$config['pay']['yipay']['appid']}" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">支付商家密钥：</label>
+        <div class="layui-input-inline w400">
+            <input type="text" name="pay[yipay][key]" placeholder="" value="{$config['pay']['yipay']['key']}" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商家收款平台：</label>
+        <div class="layui-input-inline w400">
+            <input type="text" name="pay[yipay][type]" placeholder="" value="{$config['pay']['yipay']['type']}" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux">1：支付宝；2：QQ钱包；3：微信；4：财付通（多个用逗号分隔）</div>
+    </div>
+</div>

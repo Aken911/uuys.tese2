@@ -1,0 +1,157 @@
+#help .help-page {
+				margin: 40px 0
+			}
+
+			#help .help-page .go-home-a {
+				color: #f90;
+				cursor: pointer
+			}
+
+			#help .help-page .goHome {
+				border: 1px solid #363636;
+				padding: 40px 0
+			}
+
+			#help .help-page .goHome .go-home-content {
+				width: 600px;
+				margin: auto
+			}
+
+			#help .help-page .goHome .go-home-content .content-div .go-home-item {
+				line-height: 22px;
+				margin-bottom: 30px
+			}
+
+			#help .help-page .goHome .go-home-content .content-div .go-home-item .go-home-title {
+				color: #f90
+			}
+
+			#help .help-page .goHome .go-home-content .content-div .go-home-item .go-home-dev .collapsible {
+				border: 0;
+				position: relative;
+				-webkit-box-shadow: initial;
+				box-shadow: none
+			}
+
+			#help .help-page .goHome .go-home-content .content-div .go-home-item .go-home-dev .collapsible .active .collapsible-header i.iconfont {
+				-webkit-transform: rotate(90deg);
+				transform: rotate(90deg)
+			}
+
+			#help .help-page .goHome .go-home-content .content-div .go-home-item .go-home-dev .collapsible .collapsible-header {
+				background: transparent;
+				border-color: #363636
+			}
+
+			#help .help-page .goHome .go-home-content .content-div .go-home-item .go-home-dev .collapsible .collapsible-header i.iconfont {
+				position: absolute;
+				right: 0;
+				font-size: 14px;
+				margin: 0
+			}
+
+			#help .help-page .goHome .go-home-content .content-div .go-home-item .go-home-dev .collapsible .collapsible-body {
+				border-color: #363636
+			}
+
+			#help .help-page .goHome .go-home-content .content-div .go-home-item .go-home-dev .collapsible .collapsible-body img {
+				max-width: 100%
+			}
+
+			#help .help-page .goHome .go-home-content .content-div .go-home-item .go-home-dev .collapsible .collapsible-body .coll-txt {
+				margin: 10px 0
+			}
+
+			#help .help-page .goHome .go-home-content .content-div .go-home-item .go-home-dev .collapsible .collapsible-body .coll-title {
+				color: #f90
+			}
+
+			#help .help-page .contact,
+			#help .help-page .cooperation {
+				border: 1px solid #363636;
+				padding: 120px 0 200px
+			}
+
+			#help .help-page .contact .cooperation-content,
+			#help .help-page .cooperation .cooperation-content {
+				width: 500px;
+				margin: auto
+			}
+
+			#help .help-page .contact .cooperation-content .help-txt-div .help-txt,
+			#help .help-page .cooperation .cooperation-content .help-txt-div .help-txt {
+				margin-bottom: 15px;
+				line-height: 20px
+			}
+
+			#help .help-page .collection-page {
+				padding-top: 20px;
+				padding-bottom: 20px
+			}
+
+			#help .help-page .collection-page .collection-page-item .collection-item-title {
+				font-size: 18px;
+				color: #f90
+			}
+
+			#help .help-page .collection-page .collection-page-item .collection-item-contant .collection-item-txt {
+				margin: 15px 0;
+				line-height: 1.4
+			}
+
+			#help .help-page .collection-page .collection-page-item .collection-item-contant .collection-item-img {
+				border: 1px solid #363636
+			}
+
+			#help .help-page .collection-page .collection-page-item .collection-item-contant .collection-item-img img {
+				width: 100%
+			}
+			@media screen and (max-width:961px) {
+				#help .help-page {
+					margin: 0
+				}
+
+				#help .help-page .goHome {
+					border: 0;
+					padding: 0
+				}
+
+				#help .help-page .goHome .go-home-content {
+					width: 100%
+				}
+
+				#help .help-page .goHome .go-home-content .collapsible {
+					margin: 0
+				}
+
+				#help .help-page .goHome .go-home-content .collapsible .collapsible-header {
+					padding: 10px
+				}
+
+				#help .help-page .goHome .go-home-content .collapsible .collapsible-header i {
+					width: auto
+				}
+
+				#help .help-page .goHome .go-home-content .collapsible .collapsible-body {
+					padding: 10px
+				}
+
+				#help .help-page .contact,
+				#help .help-page .cooperation {
+					border: 0;
+					padding: 20px 0
+				}
+
+				#help .help-page .contact .cooperation-content,
+				#help .help-page .cooperation .cooperation-content {
+					width: 100%;
+					margin: auto;
+					padding-bottom: 150px
+				}
+
+				#help .help-page .contact .cooperation-content .help-txt-div .help-txt,
+				#help .help-page .cooperation .cooperation-content .help-txt-div .help-txt {
+					margin-bottom: 20px;
+					line-height: 20px
+				}
+			}
